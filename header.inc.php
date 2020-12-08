@@ -1,3 +1,9 @@
+<?PHP
+
+$url = basename($_SERVER['REQUEST_URI']);
+
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -50,17 +56,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<i class="icon-bar"></i>
 							</button>				  
 							<div class="navbar-brand">
-								<h1><a href="index.php">Ced Hosting</a></h1>
+								<h1><a href="index.php">Ced <span>Hosting</span></a></h1>
 							</div>
 						</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li class="active"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
-								<li><a href="about.php">About</a></li>
-								<li><a href="services.php">Services</a></li>
-								<li class="dropdown">
+								<li class="<?php if($url=='index.php' || $url=='ced_hosting'){ echo 'active'; } ?>"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
+								<li class="<?php if($url=='about.php'){ echo 'active'; } ?>"><a href="about.php">About</a></li>
+								<li class="<?php if($url=='services.php'){ echo 'active'; } ?>"><a href="services.php">Services</a></li>
+								<?php 
+								if($url == 'linuxhosting.php' || $url == 'wordpresshosting.php' || $url == 'windowshosting.php' || $url == 'cmshosting.php') {
+									$active = "active";
+								} else {
+									$active = '';
+								}
+
+								?>
+								<li class="dropdown <?php echo $active; ?>">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 									<ul class="dropdown-menu">
 										<li><a href="linuxhosting.php">Linux hosting</a></li>
@@ -69,10 +83,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li><a href="cmshosting.php">CMS Hosting</a></li>
 									</ul>			
 								</li>
-								<li><a href="pricing.php">Pricing</a></li>
-								<li><a href="blog.php">Blog</a></li>
-								<li><a href="contact.php">Contact</a></li>
-								<li><a href="login.php">Login</a></li>
+								<li class="<?php if($url=='pricing.php'){ echo 'active'; } ?>"><a href="pricing.php">Pricing</a></li>
+								<li class="<?php if($url=='blog.php'){ echo 'active'; } ?>"><a href="blog.php">Blog</a></li>
+								<li class="<?php if($url=='contact.php'){ echo 'active'; } ?>"><a href="contact.php">Contact</a></li>
+								<li class="<?php if($url=='login.php'){ echo 'active'; } ?>"><a href="login.php">Login</a></li>
 							</ul>
 									  
 						</div><!-- /.navbar-collapse -->
