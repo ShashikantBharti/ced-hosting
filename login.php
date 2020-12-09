@@ -1,10 +1,44 @@
 <?php 
 	require 'header.inc.php';
+
+	$message = '';
+	$className = '';
+	
+	if(isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
+
+		$query = new Query;
+		$username = $_REQUEST['username'];
+		$password = $_REQUEST['password'];
+
+		$user = $query->getData('tbl_user','',["email"=>$username]);
+		
+		if($user != 0) {
+			if(md5($password) == $user[0]['password']){
+				$_SESSION['USER_ID'] = $user[0]['id'];
+				$_SESSION['IS_ADMIN'] = $user[0]['is_admin'];
+			} else {
+				$message = '';
+				$className = '';
+			}
+		} else {
+			$message = 'Login Failed! Something went wrong!';
+			$className = 'alert-danger';
+		}
+		
+
+		
+	}
 ?>
 <!---login--->
 <div class="content">
 	<div class="main-1">
 		<div class="container">
+			<?php  if($message != ''){	?>
+				 <div class="alert <?php echo $className; ?> alert-dismissible fade in" role="alert">
+			      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			      <?php echo $message; ?>
+			    </div>
+				<?php } ?>
 			<div class="login-page">
 				<div class="account_grid">
 					<div class="col-md-6 login-left">
@@ -18,14 +52,14 @@
 						<form>
 						  <div>
 							<span>Email Address<label>*</label></span>
-							<input type="text"> 
+							<input type="text" name="username"> 
 						  </div>
 						  <div>
 							<span>Password<label>*</label></span>
-							<input type="password"> 
+							<input type="password" name="password"> 
 						  </div>
 						  <a class="forgot" href="#">Forgot Your Password?</a>
-						  <input type="submit" value="Login">
+						  <input type="submit" value="Login" name="submit">
 						</form>
 					</div>	
 					<div class="clearfix"> </div>

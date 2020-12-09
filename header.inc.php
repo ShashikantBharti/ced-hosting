@@ -1,5 +1,6 @@
 <?PHP
-
+	
+require 'functions.inc.php';
 $url = basename($_SERVER['REQUEST_URI']);
 
 ?>
@@ -18,6 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!---fonts-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 <link href='https://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <!---fonts-->
@@ -25,6 +27,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/modernizr.custom.97074.js"></script>
 <script src="js/jquery.chocolat.js"></script>
 <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
+<!--lightboxfiles-->
+
+
+<?php
+
+if($url == 'account.php' || $url == 'contact.php' || $url == 'linuxhosting.php' || $url == 'wordpresshosting.php' || $url == 'windowshosting.php' || $url == 'cmshosting.php' || $url == 'login.php' || $url == 'pricing.php' || $url == 'blog.php') {
+?>
+<!--script-->
+<link rel="stylesheet" href="css/swipebox.css">
+<script src="js/jquery.swipebox.min.js"></script> 
+	<script type="text/javascript">
+		jQuery(function($) {
+			$(".swipebox").swipebox();
+		});
+	</script>
+<!--script-->
+<?php
+}
+if($url == 'index.php' || $url == 'ced_hosting' || $url == 'about.php' || $url == 'services.php') {
+?>
 <!--lightboxfiles-->
 <script type="text/javascript">
 	$(function() {
@@ -40,6 +62,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>						
 <!--script-->
+
+<?php 
+}
+?>
+
 </head>
 <body>
 	<!---header--->
@@ -86,7 +113,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li class="<?php if($url=='pricing.php'){ echo 'active'; } ?>"><a href="pricing.php">Pricing</a></li>
 								<li class="<?php if($url=='blog.php'){ echo 'active'; } ?>"><a href="blog.php">Blog</a></li>
 								<li class="<?php if($url=='contact.php'){ echo 'active'; } ?>"><a href="contact.php">Contact</a></li>
-								<li class="<?php if($url=='login.php'){ echo 'active'; } ?>"><a href="login.php">Login</a></li>
+								<?php 
+									if(isset($_SESSION['USER_ID']) && $_SESSION['IS_ADMIN'] == 0) {
+
+										?>
+										<li class=""><a href="logout.php">Logout</a></li>
+
+										<?php
+
+									} else {
+										?>
+										<li class="<?php if($url=='login.php'){ echo 'active'; } ?>"><a href="login.php">Login/Register</a></li>
+										<?php
+									}
+								?>
+								<li class="<?php if($url=='cart.php'){ echo 'active'; } ?>"><a href="cart.php">Cart<i class="fas fa-shopping-cart"></i></a></li>
 							</ul>
 									  
 						</div><!-- /.navbar-collapse -->

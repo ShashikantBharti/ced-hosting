@@ -106,7 +106,7 @@ body{
     background: #7277d5;
 }
 .banner-grids {
-    padding-top: 5em;
+    padding:  10rem 0;
 }
 .banner-grid h3 {
     font-size: 3.5em;
@@ -1566,7 +1566,9 @@ a.button4:hover {
 	display: block;
 	text-transform: uppercase;
 }
-.register-top-grid input[type="text"], .register-bottom-grid input[type="password"] {
+.register-top-grid input[type="text"], 
+.register-bottom-grid input[type="password"],
+.register-bottom-grid select {
 	border: 1px solid #555;
 	outline-color:#FD9F3E;
 	width: 96%;
@@ -1657,6 +1659,24 @@ a.button4:hover {
 	text-transform: uppercase;
 	border: none;
 	outline: none;
+}
+.register-btn {
+  margin-top:1em;
+  background: #e7663f;
+  color: #FFF;
+  font-size: 1.2em;
+  padding: 0.6em 2em;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  display: inline-block;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+}
+.register-btn:hover {
+  background:#7277d5;
 }
 .register-but input[type="submit"]:hover {
 	background:#7277d5;
@@ -3663,4 +3683,4 @@ a.button2 {
 .contact-left input[type="submit"], .contact-left input[type="reset"] {
     width: 30%;
 }
-}
+
