@@ -16,9 +16,10 @@
 			if(md5($password) == $user[0]['password']){
 				$_SESSION['USER_ID'] = $user[0]['id'];
 				$_SESSION['IS_ADMIN'] = $user[0]['is_admin'];
+				header('location: ./');
 			} else {
-				$message = '';
-				$className = '';
+				$message = 'Login Failed! User id or Password is Incorrect!';
+				$className = 'alert-danger';
 			}
 		} else {
 			$message = 'Login Failed! Something went wrong!';
@@ -52,11 +53,11 @@
 						<form>
 						  <div>
 							<span>Email Address<label>*</label></span>
-							<input type="text" name="username"> 
+							<input type="text" name="username" required> 
 						  </div>
 						  <div>
 							<span>Password<label>*</label></span>
-							<input type="password" name="password"> 
+							<input type="password" name="password" required> 
 						  </div>
 						  <a class="forgot" href="#">Forgot Your Password?</a>
 						  <input type="submit" value="Login" name="submit">

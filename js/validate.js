@@ -33,11 +33,26 @@ $(document).ready(function(){
   // Validate mobile number
   function validateMobile(){
     let value = $(this).val();
-    let pattern = new RegExp('^[0]{0,1}[6-9][0-9]{9}$');
+    let pattern = new RegExp('^[0]{0,1}[6-9]{1}[0-9]{9}$');
     if(!pattern.test(value)) {
       displayError(this,'#mobileHelp','Invalid Mobile Number!');
     } else {
-      noError(this,'#mobileHelp');
+      value = value.split('');
+      let count = 0;
+      
+      for (let i = 0; i<value.length-1; i++) {
+        for (let j = 1; i<value.length; i++) {
+          if(value[i] == value[j]) {
+            count++;
+          }
+        }  
+      }
+      console.log(count);
+      if(count>4) {
+        displayError(this,'#mobileHelp','Invalid Mobile Number!');
+      } else {
+        noError(this,'#mobileHelp');
+      }
     }
   }
 
@@ -51,12 +66,14 @@ $(document).ready(function(){
       noError(this,'#emailHelp');
     }
   }
-  
+
   // Validate Password
   function validatePassword(){
     let value = $(this).val();
     let pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$');
-    if(!pattern.test(value)) {
+    if (value.length < 5) {
+      displayError(this,'#passwordHelp','Password is too week!');
+    } else if(!pattern.test(value)) {
       displayError(this,'#passwordHelp','Week Password!');
     } else {
       noError(this,'#passwordHelp','Strong Password!');
@@ -100,6 +117,6 @@ $(document).ready(function(){
 });
 
 // Name pattern       =   '/^[^\s]+[a-zA-Z ]+[^\s]+$/';
-// Mobile pattern     =   '/^[0]{1}[6-9]\d{9}$/';
+// Mobile pattern     =   '/^[0]{0,1}[6-9][0-9]{9}$/';
 // Email pattern      =   '/^[a-zA-Z0-9_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
 // Password pattern   =   '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/';

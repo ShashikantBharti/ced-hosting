@@ -1,11 +1,12 @@
 <?php 
-	require 'header.inc.php';
+
+    require 'header.inc.php';
 ?>
-		<!--about--->
-				<div class="content">
-					<div class="about-section">
-						<div class="container">
-							<h2>about us</h2>
+    <!--about--->
+    <div class="content">
+        <div class="about-section">
+            <div class="container">
+                <h2>about us</h2>
 							<div class="about-grids">
 								<div class="col-md-3 about-grid">
 									<img src="images/p4.jpg" class="img-responsive" alt="/">
