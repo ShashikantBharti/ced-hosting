@@ -1,6 +1,3 @@
-<?php 
+<?php
 
-echo md5('Surya@123');
-
-
-?>
+echo md5('password');

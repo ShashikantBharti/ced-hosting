@@ -82,7 +82,7 @@ class Query extends Database
         }
     }
 
-    public function sendEmail($to = '', $name = '')
+    public function sendMail($to = '', $name = '')
     {
         
         $robo = 'surya.indian321@gmail.com';
