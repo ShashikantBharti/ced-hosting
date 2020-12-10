@@ -1,7 +1,7 @@
 <?php
- require '../functions.inc.php';
+session_start();
 if (isset($_SESSION['USER_ID'])) {
-    if (isset($_SESSION['IS_ADMIN']) and $_SESSION['IS_ADMIN'] != 1) {
+    if(isset($_SESSION['IS_ADMIN']) and $_SESSION['IS_ADMIN'] != 1) {
         header('location: ../');
     }
 } else {

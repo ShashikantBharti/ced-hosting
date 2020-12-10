@@ -1,5 +1,6 @@
 <?php
-    require 'header.inc.php';
+    session_start();
+    require 'functions.inc.php';
 
     $message = '';
     $className = '';
@@ -29,6 +30,7 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
         $className = 'alert-danger';
     }
 }
+require 'header.inc.php';
 ?>
 <!---login--->
 <div class="content">

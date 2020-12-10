@@ -1,6 +1,6 @@
 <?PHP
 	
-require 'functions.inc.php';
+
 $url = basename($_SERVER['REQUEST_URI']);
 
 ?>

@@ -1,5 +1,6 @@
 <?php
-    require 'header.inc.php';
+    require 'functions.inc.php';
+  
     $query = new Query;
     $message = '';
     $className = '';
@@ -26,6 +27,7 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
         }
     }
 }
+  require 'header.inc.php';
 ?>
 <!---login--->
 <div class="content">
