@@ -1,9 +1,12 @@
 <?php
+
 require '../functions.inc.php';
+
+ob_start();
 $query = new Query;
 
 
-
+ob_end_flush();
 require 'header.inc.php';
 ?><main class="content">
 	<div class="container-fluid p-0">
@@ -19,7 +22,13 @@ require 'header.inc.php';
 						<form class="form-inline">
 							<select class="custom-select mb-2 mr-2" name="mainCategory">
 								<option selected>Main Category...</option>
-								<option>Hosting</option>
+								<?php 
+									$result = $query->getData('tbl_product','',['prod_parent_id'=>0]);
+									?>
+									<option value="0"><?php echo $result[0]['prod_name']; ?></option>
+									<?php
+								?>
+								
 							</select>
 							<input type="text" class="form-control mb-2 mr-sm-2" id="name" placeholder="Category Name..." name="name" required>
 							<input type="text" class="form-control mb-2 mr-sm-2" id="link" placeholder="Link..." name="link">
@@ -54,18 +63,35 @@ require 'header.inc.php';
 							</tr>
 						</thead>
 						<tbody>
+							<?php
+								$result = $query->getData('tbl_product','',["prod_parent_id"=>1]);
+								if($result != 0) {
+									$sr = 1;
+									foreach($result as $category) {
+										?>
+
+
 							<tr>
-								<td>1</td>
-								<td>Hosting</td>
-								<td>Linux Hosting</td>
-								<td> </td>
-								<td>Yes</td>
-								<td class="d-none d-md-table-cell">June 21, 1961</td>
+								<td><?php echo $sr++; ?></td>
+								<td><?php 
+								echo $query->getData('tbl_product','',["prod_parent_id"=>0])[0]['prod_name'];
+
+								 ?></td>
+								<td><?php echo $category['prod_name']; ?></td>
+								<td> <?php echo $category['link']; ?> </td>
+								<td><?php echo $category['prod_available']?'Yes':'No'; ?></td>
+								<td class="d-none d-md-table-cell"><?php echo $category['prod_launch_date']; ?></td>
 								<td class="table-action">
-									<a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-									<a href="#"><i class="align-middle" data-feather="trash"></i></a>
+									<a href="#" data-toggle="tooltip" data-placement="left" title="Edit"><i class="align-middle" data-feather="edit-2"></i></a>
+									<a href="#" data-toggle="tooltip" data-placement="right" title="Delete"><i class="align-middle" data-feather="trash"></i></a>
 								</td>
 							</tr>
+								<?php
+									}
+								} else {
+									echo '<h6 class="card-subtitle text-muted ml-4 mt-2">No Record Found!</h6>';
+								}
+							?>
 						</tbody>
 					</table>
 				</div>
