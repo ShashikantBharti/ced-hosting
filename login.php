@@ -6,8 +6,8 @@
     
 if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
     $query = new Query;
-    $username = $_REQUEST['username'];
-    $password = $_REQUEST['password'];
+    $username = $query->getSafeValue($_REQUEST['username']);
+    $password = $query->getSafeValue($_REQUEST['password']);
 
     $user = $query->getData('tbl_user', '', ["email"=>$username]);
         
@@ -21,11 +21,11 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                 header('location: ./');
             }
         } else {
-            $message = 'Login Failed! User id or Password is Incorrect!';
+            $message = 'Login Failed! Password is Incorrect!';
             $className = 'alert-danger';
         }
     } else {
-        $message = 'Login Failed! Something went wrong!';
+        $message = 'Login Failed! User not exists!';
         $className = 'alert-danger';
     }
 }

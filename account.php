@@ -1,18 +1,18 @@
 <?php
     require 'header.inc.php';
+    $query = new Query;
     $message = '';
     $className = '';
 if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
-    $firstName = $_REQUEST['firstName'];
-    $lastName = $_REQUEST['lastName'];
-    $mobile = $_REQUEST['mobile'];
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
-    $confirmPassword = $_REQUEST['confirmPassword'];
-    $securityQuestion = $_REQUEST['securityQuestion'];
-    $securityAnser = $_REQUEST['securityAnser'];
+    $firstName = $query->getSafeValue($_REQUEST['firstName']);
+    $lastName = $query->getSafeValue($_REQUEST['lastName']);
+    $mobile = $query->getSafeValue($_REQUEST['mobile']);
+    $email = $query->getSafeValue($_REQUEST['email']);
+    $password = $query->getSafeValue($_REQUEST['password']);
+    $confirmPassword = $query->getSafeValue($_REQUEST['confirmPassword']);
+    $securityQuestion = $query->getSafeValue($_REQUEST['securityQuestion']);
+    $securityAnser = $query->getSafeValue($_REQUEST['securityAnser']);
     if ($password == $confirmPassword) {
-        $query = new Query;
         $password = md5($password);
         $name = $firstName.' '.$lastName;
         $result = $query->insertData('tbl_user', ["email"=>$email,"name"=>$name,"mobile"=>$mobile,"email_approved"=>0,"phone_approved"=>0,"active"=>0,"is_admin"=>0,"password"=>$password, "security_question"=>$securityQuestion,"security_answer"=>$securityAnser]);

@@ -82,6 +82,50 @@ class Query extends Database
         }
     }
 
+    public function updateData($table, $data = '', $conditions = '')
+    {
+        if ($data != '') {
+            $sql = " UPDATE `$table` SET ";
+            $c = count($data);
+            $i = 1;
+
+            foreach ($data as $key => $value) {
+                if ($c == $i) {
+                    $sql .= " `$key`='$value'";
+                } else {
+                    $sql .= " `$key`='$value',";
+                }
+                $i++;
+            }
+
+            foreach ($conditions as $key => $value) {
+                $sql .= " WHERE `$key`='$value'";
+            }
+            
+            return $this->connect()->query($sql);
+        }
+    }
+
+    public function deleteData($table, $data = '', $conditions = '')
+    {
+        if ($conditions != '') {
+            $sql = "DELETE FROM `$table` WHERE";
+            $count = count($conditions);
+            $i = 1;
+
+            foreach ($conditions as $key => $value) {
+                if ($count == $i) {
+                    $sql .= " `$key`='$value' ";
+                } else {
+                    $sql .= " `$key`='$value' AND";
+                }
+                $i++;
+            }
+
+            return $this->connect()->query($sql);
+        }
+    }
+
     public function sendMail($to = '', $name = '')
     {
         
@@ -130,5 +174,10 @@ class Query extends Database
         } catch (Exception $e) {
             echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
         }
+    }
+
+    public function getSafeValue($value = '')
+    {
+        return $this->connect()->real_escape_string($value);
     }
 }
