@@ -1,9 +1,9 @@
 <?php
-    require 'functions.inc.php';
+    require_once 'functions.inc.php';
   
     $query = new Query;
-    $message = '';
-    $className = '';
+    $regMessage = '';
+    $regClassName = '';
 if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
     $firstName = $query->getSafeValue($_REQUEST['firstName']);
     $lastName = $query->getSafeValue($_REQUEST['lastName']);
@@ -17,13 +17,19 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
         $password = md5($password);
         $name = $firstName.' '.$lastName;
         $result = $query->insertData('tbl_user', ["email"=>$email,"name"=>$name,"mobile"=>$mobile,"email_approved"=>0,"phone_approved"=>0,"active"=>0,"is_admin"=>0,"password"=>$password, "security_question"=>$securityQuestion,"security_answer"=>$securityAnser]);
-
         if ($result) {
-            $message = "Registration successfull!";
-            $className = "alert-success";
+            $result = $query->sendMail($email,$name,$result);
+            if ($result) {
+                $regMessage = "<strong>Registration successfull!</strong> Check your email!";
+                $regClassName = "alert-success";
+            } else {
+                $regMessage = "OOPs Something went wrong!";
+                $regClassName = "alert-danger";
+            }
+
         } else {
-            $message = "Registration Failed!";
-            $className = "alert-danger";
+            $regMessage = "Registration Failed!";
+            $regClassName = "alert-danger";
         }
     }
 }
@@ -35,12 +41,16 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
     <div class="main-1">
         <div class="container">
             <div class="register">
-                <?php  if ($message != '') {  ?>
-                 <div class="alert <?php echo $className; ?> alert-dismissible fade in" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <?php echo $message; ?>
-                </div>
-                <?php } ?>
+                <?php  if ($regMessage != ''):  ?>
+                <div class="alert <?php echo $regClassName; ?> alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="alert-regMessage">
+                            <?php echo $regMessage; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
               <form action="" method="POST"> 
                  <div class="register-top-grid">
                     <h3>personal information</h3>
@@ -104,6 +114,7 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                      
 
                      <button type="submit" name="submit" value="submit" class="register-btn">Submit</button>
+                     
                 </form>
                 <p> * Mandatory fields.</p>
                 <div class="clearfix"> </div>

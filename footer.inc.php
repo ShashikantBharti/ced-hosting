@@ -100,7 +100,7 @@
 					</div>
 				</div>
 			<!---footer--->
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="js/validate.js"></script>		
 </body>
 </html>

@@ -36,14 +36,14 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
             <nav id="sidebar" class="sidebar">
                 <div class="sidebar-content js-simplebar">
                     <a class="sidebar-brand" href="index.php">
-                        <span class="align-middle"><i class="fab fa-asymmetrik"></i> Ced Hosting</span>
+                        <span class="align-middle"><i class="align-middle" data-feather="activity"></i> Ced Hosting</span>
                     </a>
                     <ul class="sidebar-nav">
                         <li class="sidebar-item <?php if ($URL == 'admin'||$URL=='index.php') {
                             echo 'active';
                                                 } ?>">
                             <a class="sidebar-link" href="index.php">
-                                <i class="fas fa-tachometer-alt"></i> <span class="align-middle">Dashboard</span>
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                             </a>
                         </li>
 
@@ -72,7 +72,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
                         <!-- Order Nav -->
                         <li class="sidebar-item <?php echo in_array($URL, $ordersURL)?'active':''; ?>">
                             <a href="#orders" data-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Orders</span>
+                                <i class="align-middle" data-feather="truck"></i> <span class="align-middle">Orders</span>
                             </a>
                             <ul id="orders" class="sidebar-dropdown list-unstyled collapse <?php echo in_array($URL, $ordersURL)?'show':''; ?>" data-parent="#sidebar">
                                 <li class="sidebar-item <?php if ($URL == 'pending-orders.php') {
@@ -90,7 +90,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
                         <!-- Services -->
                         <li class="sidebar-item <?php echo in_array($URL, $servicesURL)?'active':''; ?>">
                             <a href="#services" data-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Services</span>
+                                <i class="align-middle" data-feather="package"></i> <span class="align-middle">Services</span>
                             </a>
                             <ul id="services" class="sidebar-dropdown list-unstyled collapse <?php echo in_array($URL, $servicesURL)?'show':''; ?>" data-parent="#sidebar">
                                 <li class="sidebar-item <?php if ($URL == 'active-services.php') {
@@ -103,7 +103,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
                         <!-- Users -->
                          <li class="sidebar-item  <?php echo in_array($URL, $usersURL)?'active':''; ?>">
                             <a href="#users" data-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Users</span>
+                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Users</span>
                             </a>
                             <ul id="users" class="sidebar-dropdown list-unstyled collapse <?php echo in_array($URL, $usersURL)?'show':''; ?>" data-parent="#sidebar">
                                 <li class="sidebar-item <?php if ($URL == 'all-users.php') {
@@ -116,7 +116,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
                         <!-- Blog -->
                         <li class="sidebar-item <?php echo in_array($URL, $blogURL)?'active':''; ?>">
                             <a href="#blog" data-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Blog</span>
+                                <i class="align-middle" data-feather="edit"></i> <span class="align-middle">Blog</span>
                             </a>
                             <ul id="blog" class="sidebar-dropdown list-unstyled collapse <?php echo in_array($URL, $blogURL)?'show':''; ?>" data-parent="#sidebar">
                                 <li class="sidebar-item <?php if ($URL == 'add-new-blog.php') {
@@ -129,7 +129,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
                         <!-- Accounts -->
                         <li class="sidebar-item <?php echo in_array($URL, $accountsURL)?'active':''; ?>">
                             <a href="#accounts" data-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Accounts</span>
+                                <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Accounts</span>
                             </a>
                             <ul id="accounts" class="sidebar-dropdown list-unstyled collapse <?php echo in_array($URL, $accountsURL)?'show':''; ?>" data-parent="#sidebar">
                                 <li class="sidebar-item <?php if ($URL == 'update-company-info.php') {
@@ -144,7 +144,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
                         <!-- Logout -->
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="logout.php">
-                                <i class="fas fa-tachometer-alt"></i> <span class="align-middle">Logout</span>
+                                <i class="align-middle" data-feather="power"></i><span class="align-middle">Logout</span>
                             </a>
                         </li>
                         <!-- //Logout -->

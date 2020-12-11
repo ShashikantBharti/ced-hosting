@@ -2,8 +2,8 @@ $(document).ready(function(){
   // Validate Name
   $('#firstName').on('blur', validateFirstName);
   $('#lastName').on('blur', validateLastName);
-  $('#mobile').on('blur', validateMobile);
-  $('#email').on('blur', validateEmail);
+  //$('#mobile').on('blur', validateMobile);
+  //$('#email').on('blur', validateEmail);
   $('#password').on('blur', validatePassword);
   $('#confirmPassword').on('blur', validateConfirmPassword);
   $('#securityAnser').on('blur', validateSecurityAnser);
@@ -12,10 +12,17 @@ $(document).ready(function(){
   function validateFirstName(){
     let value = $(this).val();
     let pattern = new RegExp('^[^ 0-9]+[a-zA-Z ]+[^ ]$');
-    if(!pattern.test(value)) {
-      displayError(this,'#firstNameHelp','Invalid First Name!');
+    if(value == '') {
+      displayError(this,'#firstNameHelp');
+      swal("OOPs!", "First Name is empty!", "error");
     } else {
-      noError(this,'#firstNameHelp');
+      if(!pattern.test(value)) {
+        displayError(this,'#firstNameHelp');
+        swal("OOPs!", "Invalid First Name!", "error");
+      } else {
+        noError(this,'#firstNameHelp');
+        swal("Good job!", "You Entered First Name Correctly!", "success");
+      }
     }
   }
 
@@ -25,6 +32,7 @@ $(document).ready(function(){
     let pattern = new RegExp('^[^ 0-9]+[a-zA-Z ]+[^ ]$');
     if(!pattern.test(value)) {
       displayError(this,'#lastNameHelp','Invalid Last Name!');
+      swal("OOPs!", "Invalid Last Name!", "error");
     } else {
       noError(this,'#lastNameHelp');
     }
@@ -33,33 +41,18 @@ $(document).ready(function(){
   // Validate mobile number
   function validateMobile(){
     let value = $(this).val();
-    let pattern = new RegExp('^[0]{0,1}[6-9]{1}[0-9]{9}$');
+    // let pattern = ;
     if(!pattern.test(value)) {
       displayError(this,'#mobileHelp','Invalid Mobile Number!');
     } else {
-      value = value.split('');
-      let count = 0;
-      
-      for (let i = 0; i<value.length-1; i++) {
-        for (let j = 1; i<value.length; i++) {
-          if(value[i] == value[j]) {
-            count++;
-          }
-        }  
-      }
-      console.log(count);
-      if(count>4) {
-        displayError(this,'#mobileHelp','Invalid Mobile Number!');
-      } else {
-        noError(this,'#mobileHelp');
-      }
+      noError(this,'#mobileHelp');
     }
   }
 
   // Validate Email.
   function validateEmail(){
     let value = $(this).val();
-    let pattern = new RegExp('^[a-zA-Z0-9_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
+    let pattern =  /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if(!pattern.test(value)) {
       displayError(this,'#emailHelp','Invalid Email Address!');
     } else {
@@ -103,7 +96,7 @@ $(document).ready(function(){
   }
 
   function displayError(elem,id,msg) {
-    $(id).text(msg);
+    // $(id).text(msg);
     $(id).css({color:'#d9534f'});
     $(elem).css({border: '1px solid #d9534f'});
   }

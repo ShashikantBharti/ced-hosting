@@ -1,7 +1,59 @@
 <?PHP
-	
+session_start();	
 
+require_once 'functions.inc.php';
 $url = basename($_SERVER['REQUEST_URI']);
+
+$query = new Query;
+   $message = '';
+   $className = '';
+
+if (isset($_REQUEST['varify']) and base64_decode($_REQUEST['varify']) == 'email') {
+	$id = base64_decode($_REQUEST['id']);
+	$result = $query->updateData('tbl_user',["email_approved"=>1,"active"=>1],["id"=>$id]);
+	if($result) {
+		$message = '<strong>Activated</strong> Now You can Login!';
+		$className = 'alert-success';
+	}
+
+}
+
+if (isset($_REQUEST['login']) && $_REQUEST['login'] != '') {
+    
+    $username = $query->getSafeValue($_REQUEST['username']);
+    $password = $query->getSafeValue($_REQUEST['password']);
+
+    $user = $query->getData('tbl_user', '', ["email"=>$username]);
+        
+    if ($user != 0) {
+    	if($user[0]['active'] == 1) {
+	        if (md5($password) == $user[0]['password']) {
+	            $_SESSION['USER_ID'] = $user[0]['id'];
+	            $_SESSION['IS_ADMIN'] = $user[0]['is_admin'];
+	            if ($_SESSION['IS_ADMIN'] == 1) {
+	                header('location: ./admin/');
+	            } else {
+	                header('location: ./');
+	            }
+	        } else {
+	            $message = '<strong>Login Failed!</strong> Password is Incorrect!';
+	            $className = 'alert-danger';
+	        }
+	    } else {
+	    	$result = $query->sendMail($username,$user[0]['name'],$user[0]['id']);
+	    	if($result) {
+		    	$message = '<strong>You are not active user!</strong> activation link has sent to your email:'.$username.' please varify email!';
+	            $className = 'alert-warning';
+	        } else {
+	        	$message = 'OOPs something went wrong!';
+	            $className = 'alert-danger';
+	        }
+	    }
+    } else {
+        $message = '<strong>Login Failed!</strong> User not exists!';
+        $className = 'alert-danger';
+    }
+}
 
 ?>
 
@@ -104,10 +156,20 @@ if($url == 'index.php' || $url == 'ced_hosting' || $url == 'about.php' || $url =
 								<li class="dropdown <?php echo $active; ?>">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 									<ul class="dropdown-menu">
-										<li><a href="linuxhosting.php">Linux hosting</a></li>
-										<li><a href="wordpresshosting.php">WordPress Hosting</a></li>
-										<li><a href="windowshosting.php">Windows Hosting</a></li>
-										<li><a href="cmshosting.php">CMS Hosting</a></li>
+										<?php
+											$result = $query->getData('tbl_product','',["prod_parent_id"=>1,"prod_available"=>1]);
+											if($result != 0){
+												foreach($result as $link){
+													?>
+													<li>
+														<a href="<?php echo $link['link']; ?>"><?php echo $link['prod_name']; ?></a>
+													</li>
+													<?php
+												}
+											} else {
+												echo 'No Record Found!';
+											}
+										?>
 									</ul>			
 								</li>
 								<li class="<?php if($url=='pricing.php'){ echo 'active'; } ?>"><a href="pricing.php">Pricing</a></li>

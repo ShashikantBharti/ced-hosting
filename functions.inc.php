@@ -12,7 +12,7 @@ class Database
     private $_password;
     private $_dbname;
 
-   
+    
     protected function connect()
     {
         $this->_host = 'localhost';
@@ -74,9 +74,15 @@ class Query extends Database
             $fields = "`".implode('`,`', $fields)."`";
             $values = "'".implode("','", $values)."'";
             $sql = "INSERT INTO `$table`($fields) VALUES($values)";
-            // echo $sql;
-            // die;
-            return $this->connect()->query($sql);
+            
+            $conn = $this->connect();
+            
+            if($conn->query($sql) == TRUE){
+                return $conn->insert_id;
+            } else {
+                return 0;
+            }
+           
         }
     }
 
@@ -104,7 +110,7 @@ class Query extends Database
         }
     }
 
-    public function deleteData($table, $data = '', $conditions = '')
+    public function deleteData($table, $conditions = '')
     {
         if ($conditions != '') {
             $sql = "DELETE FROM `$table` WHERE";
@@ -119,22 +125,21 @@ class Query extends Database
                 }
                 $i++;
             }
-
             return $this->connect()->query($sql);
         }
     }
 
-    public function sendMail($to = '', $name = '')
+    public function sendMail($to = '', $name = '', $id = '')
     {
         
         $robo = 'surya.indian321@gmail.com';
 
-        $developmentMode = true;
+        $developmentMode = false;
 
         $mailer = new PHPMailer($developmentMode);
 
         try {
-            $mailer->SMTPDebug = 2;
+            // $mailer->SMTPDebug = 2;
             $mailer->isSMTP();
 
             if ($developmentMode) {
@@ -152,30 +157,38 @@ class Query extends Database
             $mailer->SMTPAuth = true;
             // Sender Email ID
             $mailer->Username = 'surya.indian321@gmail.com';
-            $mailer->Password = base64_decode($password);
+            $mailer->Password = base64_decode('U3VyeWFAMjQ3');
 
             $mailer->SMTPSecure = 'ssl';
             $mailer->Port = 465;
 
             // Sender
-            $mailer->setFrom('surya.indian321@gmail.com', 'Name of sender');
+            $mailer->setFrom('surya.indian321@gmail.com', 'Shashikant Bharti');
             // Reciever
             $mailer->addAddress($to, $name);
 
             $mailer->isHTML(true);
-            $mailer->Subject = 'PHPMailer Test';
-            $mailer->Body = 'This is a <b>SAMPLE<b> email sent through <b>PHPMailer<b>';
+            $id = base64_encode($id);
+            $action = base64_encode('email');
+            $mailer->Subject = 'Ced Hosting Verification email';
+            $mailer->Body = '<h4>Ced Hosting Varification Email</h4>
+                             <p>Please click below link to varify your email.</p><br> 
+                             <a style="display:inline-block;padding:14px 20px; background:#407294;color:#fff;" href="http://localhost/training/ced_hosting/login.php?varify='.$action.'&id='.$id.'">Varify</a>';
 
             $mailer->send();
             $mailer->ClearAllRecipients();
-            echo "MAIL HAS BEEN SENT SUCCESSFULLY";
+            return 1;
         } catch (Exception $e) {
-            echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
+           return 0;
         }
     }
 
     public function getSafeValue($value = '')
     {
-        return $this->connect()->real_escape_string($value);
+        if($value != '') {
+            return $this->connect()->real_escape_string($value);
+        } 
+        return '';
     }
+
 }

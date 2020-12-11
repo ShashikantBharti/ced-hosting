@@ -5,6 +5,88 @@ require '../functions.inc.php';
 ob_start();
 $query = new Query;
 
+$message = '';
+$className = '';
+$name = '';
+$link = '';
+$isAvailable = '';
+
+$action = 'add';
+
+if(isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
+	switch($_REQUEST['category']) {
+		case 'add':
+			$mainCategory = $query->getSafeValue($_REQUEST['mainCategory']);
+			$name = ucwords($query->getSafeValue($_REQUEST['name']));
+			$link = $query->getSafeValue($_REQUEST['link']);
+			$isAvailable = $query->getSafeValue($_REQUEST['isAvailable']);
+
+			$result = $query->getData('tbl_product','',["prod_name"=>$name]);
+
+			if($result != 0) {
+				$message = '<strong>Category</strong> Already Exists!';
+				$className = 'alert-danger';
+			} else {
+				$result = $query->insertData('tbl_product',["prod_parent_id"=>$mainCategory,"prod_name"=>$name,"link"=>$link,"prod_available"=>$isAvailable]);
+				if($result != 0){
+					$message = '<strong>New Category</strong> Added Successfully!';
+					$className = 'alert-success';
+				} else {
+					$message = '<strong>New Category</strong> Adition Failed!';
+					$className = 'alert-danger';
+				}
+			}
+			$name = '';
+			$link = '';
+		break;
+		case 'edit';
+			$id = $query->getSafeValue($_REQUEST['id']);
+			$result = $query->getData('tbl_product','',["id"=>$id]);
+			if($result != 0) {
+				$name = $result[0]['prod_name'];
+				$link = $result[0]['link'];
+				$isAvailable = (int)$result[0]['prod_available'];
+				$action = 'update';
+			} else {
+				$message = '<strong>Category</strong> Not Found!';
+				$className = 'alert-danger';
+			}
+
+		break;
+		case 'update':
+			$mainCategory = $query->getSafeValue($_REQUEST['mainCategory']);
+			$name = ucwords($query->getSafeValue($_REQUEST['name']));
+			$link = $query->getSafeValue($_REQUEST['link']);
+			$isAvailable = $query->getSafeValue($_REQUEST['isAvailable']);
+			$id = $query->getSafeValue($_REQUEST['id']);
+
+			$result = $query->updateData('tbl_product',["prod_parent_id"=>$mainCategory,"prod_name"=>$name,"link"=>$link,"prod_available"=>$isAvailable],["id"=>$id]);
+
+			if($result) {
+				$message = '<strong>Category</strong> Updated Successfully!';
+				$className = 'alert-success';
+			} else {
+				$message = '<strong>Category</strong> Updation Failed!';
+				$className = 'alert-danger';	
+			}
+			$name = '';
+			$link = '';
+		break;
+		case 'delete':
+			$id = $query->getSafeValue($_REQUEST['id']);
+			$result = $query->deleteData('tbl_product',["id"=>$id]);
+			if($result) {
+				$message = '<strong>Category</strong> Deleted Successfully!';
+				$className = 'alert-success';
+			} else {
+				$message = '<strong>Category</strong> Deletion Failed!';
+				$className = 'alert-danger';	
+			}
+			$name = '';
+			$link = '';
+		break;
+	}
+}
 
 ob_end_flush();
 require 'header.inc.php';
@@ -16,28 +98,38 @@ require 'header.inc.php';
 				<div class="card">
 					<div class="card-header mb-n4">
 						<h5 class="card-title">Create New Category</h5>
-						<!-- <h6 class="card-subtitle text-muted">Single horizontal row.</h6> -->
+						<?php if($message != ''): ?>
+						<div class="alert <?php echo $className; ?> alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+							<div class="alert-message">
+								<?php echo $message; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 					</div>
 					<div class="card-body">
-						<form class="form-inline">
-							<select class="custom-select mb-2 mr-2" name="mainCategory">
-								<option selected>Main Category...</option>
+						<form class="form-inline" method="POST">
+							<select class="custom-select mb-2 mr-2" name="mainCategory" required>
+								<option value="">Main Category...</option>
 								<?php 
 									$result = $query->getData('tbl_product','',['prod_parent_id'=>0]);
 									?>
-									<option value="0"><?php echo $result[0]['prod_name']; ?></option>
+									<option <?php echo ($action == 'update')?'selected':''; ?> value="1"><?php echo $result[0]['prod_name']; ?></option>
 									<?php
 								?>
 								
 							</select>
-							<input type="text" class="form-control mb-2 mr-sm-2" id="name" placeholder="Category Name..." name="name" required>
-							<input type="text" class="form-control mb-2 mr-sm-2" id="link" placeholder="Link..." name="link">
-							<select class="custom-select mb-2 mr-2" name="isAvailable">
-								<option selected>Is Available...</option>
-								<option value="1">Yes</option>
-								<option value="0">No</option>
+							<input type="text" class="form-control mb-2 mr-sm-2" id="name" placeholder="Category Name..." name="name" value="<?php echo $name; ?>" required>
+							<input type="text" class="form-control mb-2 mr-sm-2" id="link" placeholder="Link..." value="<?php echo $link; ?>" name="link">
+							<select class="custom-select mb-2 mr-2" name="isAvailable" required>
+								<option value="">Is Available...</option>
+								<option <?php echo ($isAvailable === 1)?'selected':''; ?> value="1">Yes</option>
+								<option <?php echo ($isAvailable === 0)?'selected':''; ?> value="0">No</option>
 							</select>
-							<button type="submit" name="category" value="add" class="btn btn-primary mb-2">Submit</button>
+							<input type="hidden" name="id" value="<?php echo isset($id)?$id:''; ?>">
+							<button type="submit" name="category" value="<?php echo $action; ?>" class="btn btn-primary mb-2"><?php echo ucfirst($action); ?></button>
 						</form>
 					</div>
 				</div>
@@ -48,7 +140,6 @@ require 'header.inc.php';
 				<div class="card">
 					<div class="card-header mb-n4">
 						<h5 class="card-title">All Categories</h5>
-						<!-- <h6 class="card-subtitle text-muted">Use <code>.table-striped</code> to add zebra-striping to any table row within the <code>&lt;tbody&gt;</code>.</h6> -->
 					</div>
 					<table class="table table-striped">
 						<thead>
@@ -70,7 +161,6 @@ require 'header.inc.php';
 									foreach($result as $category) {
 										?>
 
-
 							<tr>
 								<td><?php echo $sr++; ?></td>
 								<td><?php 
@@ -82,8 +172,8 @@ require 'header.inc.php';
 								<td><?php echo $category['prod_available']?'Yes':'No'; ?></td>
 								<td class="d-none d-md-table-cell"><?php echo $category['prod_launch_date']; ?></td>
 								<td class="table-action">
-									<a href="#" data-toggle="tooltip" data-placement="left" title="Edit"><i class="align-middle" data-feather="edit-2"></i></a>
-									<a href="#" data-toggle="tooltip" data-placement="right" title="Delete"><i class="align-middle" data-feather="trash"></i></a>
+									<a href="?category=edit&id=<?php echo $category['id']; ?>" data-toggle="tooltip" data-placement="left" title="Edit"><i class="align-middle" data-feather="edit-2"></i></a>
+									<a href="?category=delete&id=<?php echo $category['id']; ?>" data-toggle="tooltip" data-placement="right" title="Delete"><i class="align-middle" data-feather="trash"></i></a>
 								</td>
 							</tr>
 								<?php

@@ -1,36 +1,5 @@
 <?php
-    session_start();
-    require 'functions.inc.php';
-
-    $message = '';
-    $className = '';
-    
-if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
-    $query = new Query;
-    $username = $query->getSafeValue($_REQUEST['username']);
-    $password = $query->getSafeValue($_REQUEST['password']);
-
-    $user = $query->getData('tbl_user', '', ["email"=>$username]);
-        
-    if ($user != 0) {
-        if (md5($password) == $user[0]['password']) {
-            $_SESSION['USER_ID'] = $user[0]['id'];
-            $_SESSION['IS_ADMIN'] = $user[0]['is_admin'];
-            if ($_SESSION['IS_ADMIN'] == 1) {
-                header('location: ./admin/');
-            } else {
-                header('location: ./');
-            }
-        } else {
-            $message = 'Login Failed! Password is Incorrect!';
-            $className = 'alert-danger';
-        }
-    } else {
-        $message = 'Login Failed! User not exists!';
-        $className = 'alert-danger';
-    }
-}
-require 'header.inc.php';
+    require 'header.inc.php';
 ?>
 <!---login--->
 <div class="content">
@@ -62,7 +31,7 @@ require 'header.inc.php';
                             <input type="password" name="password" required> 
                           </div>
                           <a class="forgot" href="#">Forgot Your Password?</a>
-                          <input type="submit" value="Login" name="submit">
+                          <input type="submit" value="login" name="login">
                         </form>
                     </div>  
                     <div class="clearfix"> </div>
