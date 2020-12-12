@@ -81,10 +81,10 @@ require 'header.inc.php';
 					<?php endif; ?>
 					</div>
 					<div class="card-body mt-n4">
-						<form method="POST" action="">
+						<form method="POST" action="" id="prod-form">
 							<h4 class="mt-2">Create New Product</h4>
 							<h5 class="card-title">Enter Product Details</h5>
-							<select class="custom-select mb-3" name="category">
+							<select class="custom-select" name="category" id="category">
 								<option value="">Select Product Category...</option>
 								<?php  
 									$result = $query->getData('tbl_product','',["prod_parent_id"=>1,"prod_available"=>1]);
@@ -101,14 +101,17 @@ require 'header.inc.php';
 								
 								?>
 							</select>
-							<div class="form-row">
+							<span class="help-block"></span>
+							<div class="form-row mt-3">
 								<div class="form-group col-md-6">
 									<label for="prodName">Product Name*</label>
 									<input type="text" class="form-control" id="prodName" placeholder="Enter Product Name..." name="prodName">
+									<span class="help-block"></span>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="pageURL">Page URL</label>
 									<input type="text" class="form-control" id="pageURL" placeholder="Enter Page URL..." name="url">
+									<span class="help-block"></span>
 								</div>
 							</div>
 							<h4 class="mt-4">Product Description</h4>
@@ -117,15 +120,18 @@ require 'header.inc.php';
 								<div class="form-group col-md-6">
 									<label for="monthlyPrice">Monthly Price*</label>
 									<input type="text" class="form-control" id="monthlyPrice" placeholder="Enter Monthly Price..." name="monthlyPrice">
+									<span class="help-block"></span>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="annualPrice">Annual Price*</label>
-									<input type="number" class="form-control" id="annualPrice" placeholder="Enter Annual Price..." name="annualPrice">
+									<input type="text" class="form-control" id="annualPrice" placeholder="Enter Annual Price..." name="annualPrice">
+									<span class="help-block"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="sku">SKU*</label>
 								<input type="text" class="form-control" id="sku" placeholder="Enter Stock Keeping Unit..." name="sku">
+								<span class="help-block"></span>
 							</div>
 							<h4 class="mt-4">Features</h4>
 							<h5 class="card-title">Enter Product Features</h5>
@@ -133,35 +139,41 @@ require 'header.inc.php';
 								<div class="form-group col-md-6">
 									<label for="webSpace">Web Space (in GB)*</label>
 									<input type="text" class="form-control" id="webSpace" placeholder="Enter Web Space (in GB)..." name="webSpace">
+									<span class="help-block"></span>
 								</div>
 								
 								<div class="form-group col-md-6">
 									<label for="bandWidth">Band Width (in GB)*</label>
-									<input type="text" class="form-control" id="bandWidth" placeholder="Enter Bandwidth (in GB)..." name="bandWidth">
+									<input type="text" class="form-control" id="bandWidth" placeholder="Enter Bandwidth (in GB)..." name="bandWidth" >
+									<span class="help-block"></span>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="freeDomain">Free Domain*</label>
 									<input type="text" class="form-control" id="freeDomain" placeholder="Number of free domain..." name="freeDomain">
+									<span class="help-block"></span>
 								</div>
 								
 								<div class="form-group col-md-6">
 									<label for="mailBox">Mail Box*</label>
 									<input type="text" class="form-control" id="mailBox" placeholder="Enter number of mailbox..." name="mailBox">
+									<span class="help-block"></span>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="technology">Language/Technology Support*</label>
-									<input type="text" class="form-control" id="technology" placeholder="Number of free domains..." name="technology">
+									<input type="text" class="form-control" id="technology" placeholder="Language and Technology supported..." name="technology">
+									<span class="help-block"></span>
 								</div>
 								<div class="form-group col-md-6 pt-1">
-									<select class="custom-select mt-4" name="isAvailable">
+									<select class="custom-select mt-4" name="isAvailable" id="isAvailable">
 										<option value="">Is Available...</option>
 										<option value="1">Yes</option>
 										<option value="0">No</option>
 									</select>
+									<span class="help-block"></span>
 								</div>
 								
 							</div>
@@ -177,6 +189,7 @@ require 'header.inc.php';
 <?php
 require 'footer.inc.php';
 ?>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="js/product-form-validation.js"></script>
 </body>
 </html>

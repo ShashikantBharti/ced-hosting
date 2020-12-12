@@ -60,14 +60,20 @@ if(isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
 			$isAvailable = $query->getSafeValue($_REQUEST['isAvailable']);
 			$id = $query->getSafeValue($_REQUEST['id']);
 
-			$result = $query->updateData('tbl_product',["prod_parent_id"=>$mainCategory,"prod_name"=>$name,"link"=>$link,"prod_available"=>$isAvailable],["id"=>$id]);
-
-			if($result) {
-				$message = '<strong>Category</strong> Updated Successfully!';
-				$className = 'alert-success';
+			$data = $query->getData('tbl_product','',["id"=>$id]);
+			if(ucwords($data[0]['prod_name']) == $name && $data[0]['link'] == $link && $data[0]['prod_available'] == $isAvailable) {
+				$message = '<strong>Nothing</strong> is Updated!';
+				$className = 'alert-warning';
 			} else {
-				$message = '<strong>Category</strong> Updation Failed!';
-				$className = 'alert-danger';	
+				$result = $query->updateData('tbl_product',["prod_parent_id"=>$mainCategory,"prod_name"=>$name,"link"=>$link,"prod_available"=>$isAvailable],["id"=>$id]);
+
+				if($result) {
+					$message = '<strong>Category</strong> Updated Successfully!';
+					$className = 'alert-success';
+				} else {
+					$message = '<strong>Category</strong> Updation Failed!';
+					$className = 'alert-danger';	
+				}
 			}
 			$name = '';
 			$link = '';
@@ -110,8 +116,8 @@ require 'header.inc.php';
 					<?php endif; ?>
 					</div>
 					<div class="card-body">
-						<form class="form-inline" method="POST">
-							<select class="custom-select mb-2 mr-2" name="mainCategory" required>
+						<form class="form-inline" method="POST" id="cat-form">
+							<select class="custom-select mb-2 mr-2" name="mainCategory" id="category" required>
 								<option value="">Main Category...</option>
 								<?php 
 									$result = $query->getData('tbl_product','',['prod_parent_id'=>0]);
@@ -121,9 +127,9 @@ require 'header.inc.php';
 								?>
 								
 							</select>
-							<input type="text" class="form-control mb-2 mr-sm-2" id="name" placeholder="Category Name..." name="name" value="<?php echo $name; ?>" required>
+							<input type="text" class="form-control mb-2 mr-sm-2" id="name" placeholder="Category Name..." name="name" value="<?php echo $name; ?>" required pattern="^([a-z0-9]+(\.[a-z0-9]+)?)$">
 							<input type="text" class="form-control mb-2 mr-sm-2" id="link" placeholder="Link..." value="<?php echo $link; ?>" name="link">
-							<select class="custom-select mb-2 mr-2" name="isAvailable" required>
+							<select class="custom-select mb-2 mr-2" name="isAvailable" id="isAvailable" required>
 								<option value="">Is Available...</option>
 								<option <?php echo ($isAvailable === 1)?'selected':''; ?> value="1">Yes</option>
 								<option <?php echo ($isAvailable === 0)?'selected':''; ?> value="0">No</option>
@@ -145,8 +151,8 @@ require 'header.inc.php';
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Parent Name</th>
-								<th>Product Name</th>
+								<th>Category</th>
+								<th>Sub-Category</th>
 								<th>Link</th>
 								<th>Availibility</th>
 								<th class="d-none d-md-table-cell" style="width:25%">Launch Date</th>
@@ -195,6 +201,7 @@ require 'header.inc.php';
 <?php
 require 'footer.inc.php';
 ?>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!-- <script src="js/category-form-validation.js"></script> -->
 </body>
 </html>

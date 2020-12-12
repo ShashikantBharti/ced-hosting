@@ -51,27 +51,28 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                         </div>
                     </div>
                 <?php endif; ?>
-              <form action="" method="POST"> 
+              <form action="" method="POST" id="reg-form"> 
                  <div class="register-top-grid">
                     <h3>personal information</h3>
                      <div>
                         <span>First Name <label>*</label></span>
-                        <input type="text" name="firstName" id="firstName" required> 
+                        <input type="text" name="firstName" id="firstName" placeholder="John"> 
                         <span id="firstNameHelp" class="help-block"> </span>
                      </div>
                      <div>
                         <span>Last Name <label>*</label></span>
-                        <input type="text" name="lastName" id="lastName" required> 
+                        <input type="text" name="lastName" id="lastName" placeholder="Doe"> 
                         <span id="lastNameHelp" class="help-block"> </span>
                      </div>
+                     
                      <div>
                          <span>Mobile Number <label>*</label></span>
-                         <input type="text" name="mobile" id="mobile" required> 
+                         <input type="text" name="mobile" id="mobile" placeholder="7894561230"> 
                          <span id="mobileHelp" class="help-block"> </span>
                      </div>
                      <div>
                          <span>Email Address <label>*</label></span>
-                         <input type="text" name="email" id="email" required> 
+                         <input type="text" name="email" id="email" placeholder="example@example.com"> 
                          <span id="emailHelp" class="help-block"> </span>
                      </div>
                      <div class="clearfix"> </div>
@@ -83,20 +84,21 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                             <h3>login information</h3>
                              <div>
                                 <span>Password <label>*</label></span>
-                                <input type="password" name="password" id="password" required>
+                                <input type="password" name="password" id="password" placeholder="Password@123">
                                 <span id="passwordHelp" class="help-block"> </span>
                              </div>
                              <div>
                                 <span>Confirm Password <label>*</label></span>
-                                <input type="password" name="confirmPassword" id="confirmPassword" required> 
+                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Password@123"> 
                                 <span id="confirmPasswordHelp" class="help-block"> </span>
                              </div>
                      </div>
+                     <div class="clearfix"></div>
                      <div class="register-bottom-grid">
                         <h3>Security Information</h3>
                          <div class="has-error">
                             <span>Security Question ? <label>*</label></span>
-                            <select name="securityQuestion" id="securityQuestion" class="form-control" required>
+                            <select name="securityQuestion" id="securityQuestion" class="form-control"> 
                                 <option value="">Choose an option...</option>
                                 <option value="What was your childhood nickname?">What was your childhood nickname?</option>
                                 <option value="What is the name of your favourite childhood friend?">What is the name of your favourite childhood friend?</option>
@@ -104,10 +106,11 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                                 <option value="What was your dream job as a child?">What was your dream job as a child?</option>
                                 <option value="What is your favourite teacher's nickname?">What is your favourite teacher's nickname?</option>
                             </select>
+                            <span class="help-block"></span>
                          </div>
                          <div>
                             <span>Security Anser ? <label>*</label></span>
-                            <input type="password" name="securityAnser" id="securityAnser" required> 
+                            <input type="password" name="securityAnser" id="securityAnser" placeholder="Your anser..."> 
                             <span id="securityAnserHelp" class="help-block"> </span>
                          </div>
                      </div>

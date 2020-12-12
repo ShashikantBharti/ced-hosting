@@ -1,6 +1,12 @@
 <?PHP
 session_start();	
 
+if(isset($_SESSION['USER_ID'])) {
+	if ($_SESSION['IS_ADMIN'] == 1) {
+		header('location: ./admin/');
+	}
+}
+
 require_once 'functions.inc.php';
 $url = basename($_SERVER['REQUEST_URI']);
 
@@ -10,10 +16,16 @@ $query = new Query;
 
 if (isset($_REQUEST['varify']) and base64_decode($_REQUEST['varify']) == 'email') {
 	$id = base64_decode($_REQUEST['id']);
-	$result = $query->updateData('tbl_user',["email_approved"=>1,"active"=>1],["id"=>$id]);
-	if($result) {
-		$message = '<strong>Activated</strong> Now You can Login!';
+	$data = $query->getData('tbl_user','',["id"=>$id]);
+	if($data[0]['active'] == 1){
+		$message = '<strong>Already Verified</strong> You can Login!';
 		$className = 'alert-success';
+	} else {
+		$result = $query->updateData('tbl_user',["email_approved"=>1,"active"=>1],["id"=>$id]);
+		if($result) {
+			$message = '<strong>Activated</strong> Now You can Login!';
+			$className = 'alert-success';
+		}
 	}
 
 }
@@ -60,7 +72,7 @@ if (isset($_REQUEST['login']) && $_REQUEST['login'] != '') {
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Planet Hosting a Hosting Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>Ced Hosting | Best Hosting Service in INDIA</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -59,6 +59,43 @@ class Query extends Database
         return 0;
     }
 
+    // select tbl_product.*,tbl_product_description.* from tbl_product join tbl_product_description where tbl_product.id=tbl_product_description.prod_id
+    function getDataFrom($table1 = '',  $table2 = '', $condition = '', $fields1 = '', $fields2 = '') {
+        $sql = " SELECT ";
+        if ($fields1 != '') {
+            $count = count($fields1);
+            $i = 1;
+            foreach($fields1 as $field) {
+                if($count == $i) {
+                    $sql .= " `$table1`.`$field` ";
+                } else {
+                    $sql .= " `$table1`.`$field`, ";
+               }
+            }
+        } else {
+            $sql .= " `$table1`.*, ";
+        }
+        if ($fields2 != '') {
+            $sql .= ", ";
+            $count = count($fields2);
+            $i = 1;
+            foreach($fields2 as $field) {
+                if($count == $i) {
+                    $sql .= " `$table2`.`$field` ";
+                } else {
+                    $sql .= " `$table2`.`$field`, ";
+               }
+            }
+        } else {
+            $sql .= " `$table2`.* ";
+        }
+
+        if($condition != '') {
+            $sql .= " FROM `$table1` JOIN `$table2` WHERE `$table1`.`$condition[0]` = `$table2`.`$condition[1]` ";
+        }
+        echo $sql;
+    }
+
 
     public function insertData($table = '', $data = '')
     {
