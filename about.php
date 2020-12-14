@@ -7,13 +7,18 @@
         <div class="about-section">
             <div class="container">
                 <h2>about us</h2>
-							<div class="about-grids">
-								<div class="col-md-3 about-grid">
-									<img src="images/p4.jpg" class="img-responsive" alt="/">
-								</div>
-								<div class="col-md-9 about-grid1">
-									<h4>Mes cuml dia sed inenias ingerto lot aliiqtes</h4>
-									<p>Nemo enim ips voluptatem voluptas sitsper natuaut odit aut fugit consequuntur magni dolores eosqratio nevoluptatem nesciunt lacusueni ascet dolingerto aliiqt sit amet eism com odictor ut ligulate cot ameti dapibu. Nemo enim ipsam voluptatem voluptas sit. Aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui rationevoluptatem nesciunt. Neque poMes cuml dia sed in lacusut eniascet ingerto aliiqt es site amet .</p>
+                    <div class="about-grids">
+                        <div class="col-md-3 about-grid">
+                            <img src="images/p4.jpg" class="img-responsive" alt="/">
+                        </div>
+                        <div class="col-md-9 about-grid1">
+                        <h4>Mes cuml dia sed inenias ingerto lot aliiqtes</h4>
+                        <p>Nemo enim ips voluptatem voluptas sitsper natuaut odit aut fugit 
+						consequuntur magni dolores eosqratio nevoluptatem nesciunt lacusueni 
+						ascet dolingerto aliiqt sit amet eism com odictor ut ligulate cot ameti 
+						dapibu. Nemo enim ipsam voluptatem voluptas sit. Aspernatur aut odit aut 
+						fugit sed quia consequuntur magni dolores eos qui rationevoluptatem nesciunt.
+						 Neque poMes cuml dia sed in lacusut eniascet ingerto aliiqt es site amet .</p>
 									<div class="about-bottom">
 										<div class="col-md-6 about-bottomgrid">
 											<p>Ticdu nt mtsent justo dolor losubo ltiissim commete pulvinar ac. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus Duis ultricies.  </p>

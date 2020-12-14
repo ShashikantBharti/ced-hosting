@@ -4,4 +4,6 @@ require 'functions.inc.php';
 
 $query = new Query;
 
-$result = $query->getDataFrom('tbl_product','tbl_product_description',["id","prod_id"],["id","prod_parent_id","prod_name"]);
+$result = $query->getDataFrom('tbl_product','tbl_product_description',["id","prod_id"],'','',["tbl_product","id",14]);
+echo '<pre>';
+print_r($result);

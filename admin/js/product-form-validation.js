@@ -17,7 +17,7 @@ $(document).ready(function(){
 	// Validate Technology.
 	function validateTechnology(){
 		let value = $(this).val();
-		let pattern = /^[a-zA-Z0-9,]+$/;
+		let pattern = /^[a-zA-Z0-9, ]+$/;
 		if(value != '') {
 			if(value[0] == ' ' || value[value.length-1] == ' ') {
 				displayError(this,'No space allowed at start and end!');

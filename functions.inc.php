@@ -1,9 +1,27 @@
 <?php
-
+/**
+ * Function library.
+ * @category
+ * @package 
+ * @author 
+ * @license
+ * @link 
+ * @version 1.0
+ */
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require "vendor/autoload.php";
+
+/**
+ * Class to connect with database.
+ * @category
+ * @package 
+ * @author 
+ * @license
+ * @link 
+ * @version 1.0
+ */
 
 class Database
 {
@@ -12,7 +30,11 @@ class Database
     private $_password;
     private $_dbname;
 
-    
+    /**
+     * Function to connect with database.
+     * 
+     * @return connection.
+     */
     protected function connect()
     {
         $this->_host = 'localhost';
@@ -20,13 +42,32 @@ class Database
         $this->_password = '';
         $this->_dbname = 'cedhosting';
 
-        return (new mysqli($this->_host, $this->_user, $this->_password, $this->_dbname));
+        return ( new mysqli($this->_host, $this->_user, $this->_password, $this->_dbname) ) ;
     }
 }
+
+/**
+ * Class to perform database queries.
+ * @category
+ * @package 
+ * @author 
+ * @license
+ * @link 
+ * @version 1.0
+ */
 
 class Query extends Database
 {
 
+    /**
+     * Function to get data from database.
+     * 
+     * @param $table      Table Name.
+     * @param $fields     Fields.
+     * @param $conditions Condition 
+     *   
+     * @return data.
+     */
     public function getData($table, $fields = '', $conditions = '')
     {
         $sql = "SELECT * FROM `$table`";
@@ -59,44 +100,78 @@ class Query extends Database
         return 0;
     }
 
-    // select tbl_product.*,tbl_product_description.* from tbl_product join tbl_product_description where tbl_product.id=tbl_product_description.prod_id
-    function getDataFrom($table1 = '',  $table2 = '', $condition = '', $fields1 = '', $fields2 = '') {
+    /**
+     * Function to connect with database.
+     * 
+     * @param $table1     First table name.
+     * @param $table2     Second table name.
+     * @param $condition1 Join condition. 
+     * @param $fields1    Fields from first table.
+     * @param $fields2    Fields from second table.
+     * @param $condition2 Particular condition.
+     * 
+     * @return connection.
+     */
+    function getDataFrom($table1 = '',  $table2 = '', $condition1 = '', $fields1 = '', $fields2 = '', $condition2 = '') {
         $sql = " SELECT ";
         if ($fields1 != '') {
             $count = count($fields1);
             $i = 1;
-            foreach($fields1 as $field) {
-                if($count == $i) {
+            foreach ( $fields1 as $field ) {
+                if ($count == $i ) {
                     $sql .= " `$table1`.`$field` ";
                 } else {
                     $sql .= " `$table1`.`$field`, ";
-               }
+                }
+                $i++;
             }
         } else {
-            $sql .= " `$table1`.*, ";
+            $sql .= " `$table1`.* ";
         }
         if ($fields2 != '') {
             $sql .= ", ";
             $count = count($fields2);
             $i = 1;
-            foreach($fields2 as $field) {
-                if($count == $i) {
+            foreach ($fields2 as $field) {
+                if ($count == $i) {
                     $sql .= " `$table2`.`$field` ";
                 } else {
                     $sql .= " `$table2`.`$field`, ";
-               }
+                }
+                $i++;
             }
         } else {
-            $sql .= " `$table2`.* ";
+            $sql .= ", `$table2`.* ";
         }
 
-        if($condition != '') {
-            $sql .= " FROM `$table1` JOIN `$table2` WHERE `$table1`.`$condition[0]` = `$table2`.`$condition[1]` ";
+        if ($condition1 != '') {
+            $sql .= " FROM `$table1` JOIN `$table2` WHERE `$table1`.`$condition1[0]` = `$table2`.`$condition1[1]` ";
         }
-        echo $sql;
+
+        if ($condition2 != '') {
+            $sql .= " AND `$condition2[0]`.`$condition2[1]` = '$condition2[2]' ";
+        }
+        
+        $result = $this->connect()->query($sql);
+        if ($result -> num_rows > 0) {
+            $arr = array();
+            while ($row = $result->fetch_assoc()) {
+                $arr[] = $row;
+            }
+            return $arr;
+        }
+        return 0;
+
     }
 
-
+    /**
+     * Function to insert data in table.
+     * 
+     * @param $table Table name in which data is to be inserted.
+     * @param $data  Data to insert.
+     * 
+     * @return bool
+     */
     public function insertData($table = '', $data = '')
     {
         if ($data != '') {
@@ -114,7 +189,7 @@ class Query extends Database
             
             $conn = $this->connect();
             
-            if($conn->query($sql) == TRUE){
+            if ($conn->query($sql) == true) {
                 return $conn->insert_id;
             } else {
                 return 0;
@@ -123,6 +198,15 @@ class Query extends Database
         }
     }
 
+    /**
+     * Function to update data in database in any table. 
+     * 
+     * @param $table      Table which is to be updated.
+     * @param $data       Data to update.
+     * @param $conditions Condition at which data should be update.
+     * 
+     * @return bool
+     */
     public function updateData($table, $data = '', $conditions = '')
     {
         if ($data != '') {
@@ -147,6 +231,14 @@ class Query extends Database
         }
     }
 
+    /**
+     * Function to delete data in database in any table. 
+     * 
+     * @param $table      Table which is to be updated.
+     * @param $conditions Condition at which data should be deleted.
+     * 
+     * @return bool
+     */
     public function deleteData($table, $conditions = '')
     {
         if ($conditions != '') {
@@ -166,6 +258,15 @@ class Query extends Database
         }
     }
 
+    /**
+     * Function to send email. 
+     * 
+     * @param $to   Reciever email address.
+     * @param $name Reciever name.
+     * @param $id   Reciever id.
+     * 
+     * @return bool
+     */
     public function sendMail($to = '', $name = '', $id = '')
     {
         
@@ -200,7 +301,7 @@ class Query extends Database
             $mailer->Port = 465;
 
             // Sender
-            $mailer->setFrom('surya.indian321@gmail.com', 'Shashikant Bharti');
+            $mailer->setFrom('surya.indian321@gmail.com', 'Ced-Hosting');
             // Reciever
             $mailer->addAddress($to, $name);
 
@@ -209,8 +310,8 @@ class Query extends Database
             $action = base64_encode('email');
             $mailer->Subject = 'Ced Hosting Verification email';
             $mailer->Body = '<h4>Ced Hosting Varification Email</h4>
-                             <p>Please click below link to varify your email.</p><br> 
-                             <a style="display:inline-block;padding:14px 20px; background:#407294;color:#fff;" href="http://localhost/training/ced_hosting/login.php?varify='.$action.'&id='.$id.'">Varify</a>';
+<p>Please click below link to varify your email.</p><br> 
+<a style="display:inline-block;padding:14px 20px; background:#407294;color:#fff;" href="http://localhost/training/ced_hosting/login.php?varify='.$action.'&id='.$id.'">Varify</a>';
 
             $mailer->send();
             $mailer->ClearAllRecipients();
@@ -220,6 +321,13 @@ class Query extends Database
         }
     }
 
+    /**
+     * Function to get safe value.
+     * 
+     * @param $value Value to filter.
+     * 
+     * @return value
+     */
     public function getSafeValue($value = '')
     {
         if($value != '') {

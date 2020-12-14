@@ -54,7 +54,9 @@ if (isset($_REQUEST['login']) && $_REQUEST['login'] != '') {
 	    } else {
 	    	$result = $query->sendMail($username,$user[0]['name'],$user[0]['id']);
 	    	if($result) {
-		    	$message = '<strong>You are not active user!</strong> activation link has sent to your email:'.$username.' please varify email!';
+	    		$name = base64_encode($user[0]['name']);
+	    		$id = base64_encode($user[0]['id']);
+		    	$message = '<strong>You are not active user!</strong> activation link has sent to your email:'.$username.' please varify email! <p>Email Not recieved ?<a href="?action=sendmail&username='.base64_encode($username).'&name='.$name.'&id='.$id.'">Resend Email</a></p>';
 	            $className = 'alert-warning';
 	        } else {
 	        	$message = 'OOPs something went wrong!';
@@ -66,7 +68,23 @@ if (isset($_REQUEST['login']) && $_REQUEST['login'] != '') {
         $className = 'alert-danger';
     }
 }
-
+if(isset($_REQUEST['action']) and $_REQUEST['action'] != '') {
+	if($_REQUEST['action'] == 'sendmail') {
+		$username = base64_decode($_REQUEST['username']);
+		$name = base64_decode($_REQUEST['name']);
+		$id = base64_decode($_REQUEST['id']);
+		$result = $query->sendMail($username,$name,$id);
+    	if($result) {
+    		$name = base64_encode($name);
+    		$id = base64_encode($id);
+	    	$message = ' activation link has sent to your email: <strong>'.$username.'</strong> please varify email! <p>Email Not recieved? <a href="?action=sendmail&username='.base64_encode($username).'&name='.$name.'&id='.$id.'">Resend Email</a></p>';
+            $className = 'alert-warning';
+        } else {
+        	$message = 'OOPs something went wrong!';
+            $className = 'alert-danger';
+        } 
+	}
+}
 ?>
 
 <!DOCTYPE HTML>

@@ -29,6 +29,7 @@ $accountsURL = array('update-company-info.php','change-security-question.php','c
         <meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
         <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
         <title>Ced Hosting | Admin</title>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
         <link href="css/app.css" rel="stylesheet">
     </head>
     <body>
