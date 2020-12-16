@@ -36,7 +36,7 @@ $(document).ready(function(){
 	// Validate Number.
 	function validateNumber() {
 		let value = $(this).val();
-		let pattern = /^[0-9]$/;
+		let pattern = /^[0-9]{0,2}$/;
 		if(value != '') {
 			if(!pattern.test(value)) {
 				displayError(this, 'Invalid Input!');

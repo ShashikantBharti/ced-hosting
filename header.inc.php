@@ -1,10 +1,24 @@
 <?PHP
-session_start();	
+/**
+ * Create category page.
+ * 
+ * PHP version 7
+ * 
+ * @category  Functions.
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @version   GIT: <7.2>
+ * @link      http://127.0.0.1/training/ced_hosting
+ */
 
-if(isset($_SESSION['USER_ID'])) {
-	if ($_SESSION['IS_ADMIN'] == 1) {
-		header('location: ./admin/');
-	}
+session_start();
+
+if (isset($_SESSION['USER_ID'])) {
+    if ($_SESSION['IS_ADMIN'] == 1) {
+        header('location: ./admin/');
+    }
 }
 
 require_once 'functions.inc.php';
@@ -15,18 +29,20 @@ $query = new Query;
    $className = '';
 
 if (isset($_REQUEST['varify']) and base64_decode($_REQUEST['varify']) == 'email') {
-	$id = base64_decode($_REQUEST['id']);
-	$data = $query->getData('tbl_user','',["id"=>$id]);
-	if($data[0]['active'] == 1){
-		$message = '<strong>Already Verified</strong> You can Login!';
-		$className = 'alert-success';
-	} else {
-		$result = $query->updateData('tbl_user',["email_approved"=>1,"active"=>1],["id"=>$id]);
-		if($result) {
-			$message = '<strong>Activated</strong> Now You can Login!';
-			$className = 'alert-success';
-		}
-	}
+    $id = base64_decode($_REQUEST['id']);
+    $data = $query->getData('tbl_user', '', ["id"=>$id]);
+    if ($data[0]['active'] == 1) {
+        $message = '<strong>Already Verified</strong> You can Login!';
+        $className = 'alert-success';
+    } else {
+        $result = $query->updateData(
+            'tbl_user', ["email_approved"=>1,"active"=>1], ["id"=>$id]
+        );
+        if ($result) {
+            $message = '<strong>Activated</strong> Now You can Login!';
+            $className = 'alert-success';
+        }
+    }
 
 }
 
@@ -38,52 +54,60 @@ if (isset($_REQUEST['login']) && $_REQUEST['login'] != '') {
     $user = $query->getData('tbl_user', '', ["email"=>$username]);
         
     if ($user != 0) {
-    	if($user[0]['active'] == 1) {
-	        if (md5($password) == $user[0]['password']) {
-	            $_SESSION['USER_ID'] = $user[0]['id'];
-	            $_SESSION['IS_ADMIN'] = $user[0]['is_admin'];
-	            if ($_SESSION['IS_ADMIN'] == 1) {
-	                header('location: ./admin/');
-	            } else {
-	                header('location: ./');
-	            }
-	        } else {
-	            $message = '<strong>Login Failed!</strong> Password is Incorrect!';
-	            $className = 'alert-danger';
-	        }
-	    } else {
-	    	$result = $query->sendMail($username,$user[0]['name'],$user[0]['id']);
-	    	if($result) {
-	    		$name = base64_encode($user[0]['name']);
-	    		$id = base64_encode($user[0]['id']);
-		    	$message = '<strong>You are not active user!</strong> activation link has sent to your email:'.$username.' please varify email! <p>Email Not recieved ?<a href="?action=sendmail&username='.base64_encode($username).'&name='.$name.'&id='.$id.'">Resend Email</a></p>';
-	            $className = 'alert-warning';
-	        } else {
-	        	$message = 'OOPs something went wrong!';
-	            $className = 'alert-danger';
-	        }
-	    }
+        if ($user[0]['active'] == 1) {
+            if (md5($password) == $user[0]['password']) {
+                $_SESSION['USER_ID'] = $user[0]['id'];
+                $_SESSION['IS_ADMIN'] = $user[0]['is_admin'];
+                if ($_SESSION['IS_ADMIN'] == 1) {
+                    header('location: ./admin/');
+                } else {
+                    header('location: ./');
+                }
+            } else {
+                $message = '<strong>Login Failed!</strong> Password is Incorrect!';
+                $className = 'alert-danger';
+            }
+        } else {
+            $result = $query->sendMail($username, $user[0]['name'], $user[0]['id']);
+            if ($result) {
+                $name = base64_encode($user[0]['name']);
+                $id = base64_encode($user[0]['id']);
+                $message = '<strong>You are not active user!</strong> 
+				email verfication link has sent to your email:'.$username.' 
+				please varify email! <p>Email Not recieved ?
+				<a href="?action=sendmail&username='.base64_encode($username).'&
+				name='.$name.'&id='.$id.'">Resend Email</a></p>';
+                $className = 'alert-warning';
+            } else {
+                $message = 'OOPs something went wrong!';
+                $className = 'alert-danger';
+            }
+        }
     } else {
         $message = '<strong>Login Failed!</strong> User not exists!';
         $className = 'alert-danger';
     }
 }
-if(isset($_REQUEST['action']) and $_REQUEST['action'] != '') {
-	if($_REQUEST['action'] == 'sendmail') {
-		$username = base64_decode($_REQUEST['username']);
-		$name = base64_decode($_REQUEST['name']);
-		$id = base64_decode($_REQUEST['id']);
-		$result = $query->sendMail($username,$name,$id);
-    	if($result) {
-    		$name = base64_encode($name);
-    		$id = base64_encode($id);
-	    	$message = ' activation link has sent to your email: <strong>'.$username.'</strong> please varify email! <p>Email Not recieved? <a href="?action=sendmail&username='.base64_encode($username).'&name='.$name.'&id='.$id.'">Resend Email</a></p>';
+if (isset($_REQUEST['action']) and $_REQUEST['action'] != '') {
+    if ($_REQUEST['action'] == 'sendmail') {
+        $username = base64_decode($_REQUEST['username']);
+        $name = base64_decode($_REQUEST['name']);
+        $id = base64_decode($_REQUEST['id']);
+        $result = $query->sendMail($username, $name, $id);
+        if ($result) {
+            $name = base64_encode($name);
+            $id = base64_encode($id);
+            $message = ' activation link has sent to your email: 
+			<strong>'.$username.'</strong> please varify email! 
+			<p>Email Not recieved? <a href="?action=sendmail&
+			username='.base64_encode($username).'&name='.$name.'&id='.$id.'">
+			Resend Email</a></p>';
             $className = 'alert-warning';
         } else {
-        	$message = 'OOPs something went wrong!';
+            $message = 'OOPs something went wrong!';
             $className = 'alert-danger';
         } 
-	}
+    }
 }
 ?>
 
@@ -114,34 +138,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <?php
 
-if($url == 'account.php' || $url == 'contact.php' || $url == 'linuxhosting.php' || $url == 'wordpresshosting.php' || $url == 'windowshosting.php' || $url == 'cmshosting.php' || $url == 'login.php' || $url == 'pricing.php' || $url == 'blog.php') {
-?>
+if ($url == 'account.php' 
+    || $url == 'contact.php' 
+    || $url == 'linuxhosting.php' 
+    || $url == 'wordpresshosting.php' 
+    || $url == 'windowshosting.php' 
+    || $url == 'cmshosting.php' 
+    || $url == 'login.php' 
+    || $url == 'pricing.php' 
+    || $url == 'blog.php'
+) {
+    ?>
 <!--script-->
 <link rel="stylesheet" href="css/swipebox.css">
 <script src="js/jquery.swipebox.min.js"></script> 
-	<script type="text/javascript">
-		jQuery(function($) {
-			$(".swipebox").swipebox();
-		});
-	</script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            $(".swipebox").swipebox();
+        });
+    </script>
 <!--script-->
-<?php
+    <?php
 }
-if($url == 'index.php' || $url == 'ced_hosting' || $url == 'about.php' || $url == 'services.php') {
-?>
+if ($url == 'index.php' 
+    || $url == 'ced_hosting' 
+    || $url == 'about.php' 
+    || $url == 'services.php'
+) {
+
+    ?>
 <!--lightboxfiles-->
 <script type="text/javascript">
-	$(function() {
-	$('.team a').Chocolat();
-	});
+    $(function() {
+        $('.team a').Chocolat();
+    });
 </script>	
 <script type="text/javascript" src="js/jquery.hoverdir.js"></script>	
 <script type="text/javascript">
-	$(function() {
-	
-		$(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
+    $(function() {
 
-	});
+        $(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
+
+   });
 </script>						
 <!--script-->
 
@@ -149,24 +187,25 @@ if($url == 'index.php' || $url == 'ced_hosting' || $url == 'about.php' || $url =
 }
 ?>
 
+
 </head>
 <body>
-	<!---header--->
-		<div class="header">
-			<div class="container">
-				<nav class="navbar navbar-default">
-					<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-								<i class="sr-only">Toggle navigation</i>
-								<i class="icon-bar"></i>
-								<i class="icon-bar"></i>
-								<i class="icon-bar"></i>
-							</button>				  
-							<div class="navbar-brand">
-								<h1><a href="index.php">Ced <span>Hosting</span></a></h1>
-							</div>
+<!---header--->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <i class="sr-only">Toggle navigation</i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                            </button>				  
+                            <div class="navbar-brand">
+                                <h1><a href="index.php">Ced <span>Hosting</span></a></h1>
+                            </div>
 						</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->

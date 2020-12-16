@@ -1,4 +1,18 @@
 <?php
+/**
+ * Create category page.
+ * 
+ * PHP version 7
+ * 
+ * @category  Admin
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @version   GIT: <7.2>
+ * @link      http://127.0.0.1/training/ced_hosting
+ */
+
 require '../functions.inc.php';
 
 $query = new Query;
@@ -168,7 +182,7 @@ require 'header.inc.php';
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<?php if($message != ''): ?>
+					<?php if($message != ''): ?>
 						<div class="alert <?php echo $className; ?> alert-dismissible" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>

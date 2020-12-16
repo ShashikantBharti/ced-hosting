@@ -1,26 +1,34 @@
 <?php
 /**
- * Function library.
- * @category
- * @package 
- * @author 
- * @license
- * @link 
- * @version 1.0
+ * Create category page.
+ * 
+ * PHP version 7
+ * 
+ * @category  Functions.
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @version   GIT: <7.2>
+ * @link      http://127.0.0.1/training/ced_hosting
  */
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require "vendor/autoload.php";
 
 /**
- * Class to connect with database.
- * @category
- * @package 
- * @author 
- * @license
- * @link 
- * @version 1.0
+ * Create category page.
+ * 
+ * PHP version 7
+ * 
+ * @category  Admin
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @link      http://127.0.0.1/training/ced_hosting
  */
 
 class Database
@@ -42,18 +50,22 @@ class Database
         $this->_password = '';
         $this->_dbname = 'cedhosting';
 
-        return ( new mysqli($this->_host, $this->_user, $this->_password, $this->_dbname) ) ;
+        return ( new mysqli(
+            $this->_host, $this->_user, $this->_password, $this->_dbname
+        ));
     }
 }
-
 /**
- * Class to perform database queries.
- * @category
- * @package 
- * @author 
- * @license
- * @link 
- * @version 1.0
+ * Create category page.
+ * 
+ * PHP version 7
+ * 
+ * @category  Admin
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @link      http://127.0.0.1/training/ced_hosting
  */
 
 class Query extends Database
@@ -112,7 +124,10 @@ class Query extends Database
      * 
      * @return connection.
      */
-    function getDataFrom($table1 = '',  $table2 = '', $condition1 = '', $fields1 = '', $fields2 = '', $condition2 = '') {
+    function getDataFrom(
+        $table1 = '',  $table2 = '', $condition1 = '', 
+        $fields1 = '', $fields2 = '', $condition2 = ''
+    ) {
         $sql = " SELECT ";
         if ($fields1 != '') {
             $count = count($fields1);
@@ -145,7 +160,8 @@ class Query extends Database
         }
 
         if ($condition1 != '') {
-            $sql .= " FROM `$table1` JOIN `$table2` WHERE `$table1`.`$condition1[0]` = `$table2`.`$condition1[1]` ";
+            $sql .= " FROM `$table1` JOIN `$table2` WHERE 
+            `$table1`.`$condition1[0]` = `$table2`.`$condition1[1]` ";
         }
 
         if ($condition2 != '') {
@@ -153,7 +169,7 @@ class Query extends Database
         }
         
         $result = $this->connect()->query($sql);
-        if ($result -> num_rows > 0) {
+        if ($result->num_rows > 0) {
             $arr = array();
             while ($row = $result->fetch_assoc()) {
                 $arr[] = $row;
@@ -310,14 +326,17 @@ class Query extends Database
             $action = base64_encode('email');
             $mailer->Subject = 'Ced Hosting Verification email';
             $mailer->Body = '<h4>Ced Hosting Varification Email</h4>
-<p>Please click below link to varify your email.</p><br> 
-<a style="display:inline-block;padding:14px 20px; background:#407294;color:#fff;" href="http://localhost/training/ced_hosting/login.php?varify='.$action.'&id='.$id.'">Varify</a>';
+            <p>Please click below link to varify your email.</p><br> 
+            <a style="display:inline-block;padding:14px 20px; 
+            background:#407294;color:#fff;" 
+            href="http://localhost/training/ced_hosting/login.php?
+            varify='.$action.'&id='.$id.'">Varify</a>';
 
             $mailer->send();
             $mailer->ClearAllRecipients();
             return 1;
         } catch (Exception $e) {
-           return 0;
+            return 0;
         }
     }
 
@@ -330,7 +349,7 @@ class Query extends Database
      */
     public function getSafeValue($value = '')
     {
-        if($value != '') {
+        if ($value != '') {
             return $this->connect()->real_escape_string($value);
         } 
         return '';
