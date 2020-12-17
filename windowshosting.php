@@ -61,7 +61,7 @@
 										<li><strong>location</strong> : <img src="images/india.png"></li>
 										</ul>
 									</div>
-									<a href="#">buy now</a>
+									<a href="#" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">buy now</a>
 								</div>
 
 								<?php
@@ -100,7 +100,7 @@
 										<li><strong>location</strong> : <img src="images/us.png"></li>
 										</ul>
 									</div>
-									<a href="#" class="us-bottom">buy now</a>
+									<a href="#" class="us-bottom" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">buy now</a>
 								</div>
 
 								<?php

@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * Create category page.
  * 
@@ -9,7 +11,7 @@
  * @author    Shashikant Bharti <surya.indian321@gmail.com>
  * @copyright 2020 CEDCOSS 
  * @license   CEDCOSS 
- * @version   GIT: <7.2>
+ * @version   GIT: <1.0>
  * @link      http://127.0.0.1/training/ced_hosting
  */
 
@@ -55,6 +57,8 @@ class Database
         ));
     }
 }
+
+
 /**
  * Create category page.
  * 
@@ -355,4 +359,83 @@ class Query extends Database
         return '';
     }
 
+}
+
+
+/**
+ * Cart to manage product.
+ * 
+ * PHP version 7
+ * 
+ * @category  Cart
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @link      http://127.0.0.1/training/ced_hosting
+ */
+class Cart
+{
+
+    /**
+     * Function to add product in cart.
+     * 
+     * @return void
+     */
+    public function __construct() 
+    {
+        if (!isset($_SESSION['CART'])) {
+            $_SESSION['CART'] = array();
+        }
+    }
+
+    /**
+     * Function to add product in cart.
+     * 
+     * @param $id  Id of product.
+     * @param $sku SKU of product.
+     * 
+     * @return void
+     */
+    public function addProduct($id = '',$sku = '') 
+    {
+        array_push($_SESSION['CART'], ["id"=>$id,"sku"=>$sku]);
+    }
+
+    /**
+     * Function to remove product from cart.
+     * 
+     * @param $id Id of product to remove from cart.
+     * 
+     * @return void
+     */
+    public function removeProduct($id = '') 
+    {
+        if (isset($_SESSION['CART'])) {
+            unset($_SESSION['CART'][$id]);
+        }
+    }
+
+    /**
+     * Function to remove product from cart.
+     *
+     * @return void
+     */
+    public function emptyCart() 
+    {
+        unset($_SESSION['CART']);
+    }
+
+
+    /**
+     * Function to remove product from cart.
+     *
+     * @return count
+     */
+    public function totalProduct() 
+    {
+        if (isset($_SESSION['CART'])) {
+            return count($_SESSION['CART']);
+        }
+    }
 }

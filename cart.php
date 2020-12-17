@@ -1,9 +1,11 @@
-<?php 
-	require 'header.inc.php';
-?>
+<?php
+
+require 'functions.inc.php';
+$cart = new Cart;
+
+echo $totalProduct = $cart->totalProduct();
 
 
 
-<?php 
-	require 'footer.inc.php';
+
 ?>

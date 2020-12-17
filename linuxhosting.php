@@ -1,34 +1,34 @@
 <?php 
-	require 'header.inc.php';
+    require 'header.inc.php';
 ?>
 <!---singleblog--->
 <div class="content">
-	<div class="linux-section">
-		<div class="container">
-			<div class="linux-grids">
-				<div class="col-md-8 linux-grid">
-				<h2>Linux Hosting</h2>
-				<ul>
-					<li><span>Unlimited </span> Domains, Disk Space, Bandwidth and Email Addresses</li>
-					<li><span>99.9% uptime </span> with dedicated 24/7 technical support</li>
-					<li><span>Powered by </span> CloudLinux, cPanel (demo), Apache, MySQL, PHP, Ruby & more</li>
-					<li><span>Launch  </span> your business with Rs. 2000* Google AdWords Credit *</li>
-					<li><span>30 day </span> Money Back Guarantee</li>
-				</ul>
-					<a href="#">view plans</a>
-				</div>
-				<div class="col-md-4 linux-grid1">
-					<img src="images/linux.png" class="img-responsive" alt=""/>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	<div class="tab-prices">
-		<div class="container">
-			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-				<ul id="myTab" class="nav nav-tabs left-tab" role="tablist">
-					<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">IN Hosting</a></li>
+    <div class="linux-section">
+        <div class="container">
+            <div class="linux-grids">
+                <div class="col-md-8 linux-grid">
+                <h2>Linux Hosting</h2>
+                <ul>
+                    <li><span>Unlimited </span> Domains, Disk Space, Bandwidth and Email Addresses</li>
+                    <li><span>99.9% uptime </span> with dedicated 24/7 technical support</li>
+                    <li><span>Powered by </span> CloudLinux, cPanel (demo), Apache, MySQL, PHP, Ruby & more</li>
+                    <li><span>Launch  </span> your business with Rs. 2000* Google AdWords Credit *</li>
+                    <li><span>30 day </span> Money Back Guarantee</li>
+                </ul>
+                    <a href="#">view plans</a>
+                </div>
+                <div class="col-md-4 linux-grid1">
+                    <img src="images/linux.png" class="img-responsive" alt=""/>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-prices">
+        <div class="container">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs left-tab" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">IN Hosting</a></li>
 					<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">US Hosting</a></li>
 					</ul>
 				<div id="myTabContent" class="tab-content">
@@ -61,7 +61,7 @@
 										<li><strong>location</strong> : <img src="images/india.png"></li>
 										</ul>
 									</div>
-									<a href="#">buy now</a>
+									<a href="javascript:void(0);" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">Add Product</a>
 								</div>
 
 								<?php
@@ -101,7 +101,7 @@
 										<li><strong>location</strong> : <img src="images/us.png"></li>
 										</ul>
 									</div>
-									<a href="#" class="us-bottom">buy now</a>
+									<a href="javascript:void(0);" class="us-bottom" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">Add Product</a>
 								</div>
 
 								<?php

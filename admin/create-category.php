@@ -22,7 +22,7 @@ $query = new Query;
 $message = '';
 $className = '';
 $name = '';
-$link = '';
+$html = '';
 $isAvailable = '';
 
 $action = 'add';
@@ -32,7 +32,7 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
     case 'add':
         $mainCategory = $query->getSafeValue($_REQUEST['mainCategory']);
         $name = ucwords($query->getSafeValue($_REQUEST['name']));
-        $link = $query->getSafeValue($_REQUEST['link']);
+        $html = $query->getSafeValue($_REQUEST['html']);
         $isAvailable = $query->getSafeValue($_REQUEST['isAvailable']);
 
         $result = $query->getData('tbl_product', '', ["prod_name"=>$name]);
@@ -43,7 +43,7 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
         } else {
             $result = $query->insertData(
                 'tbl_product', ["prod_parent_id"=>$mainCategory, 
-                "prod_name"=>$name, "link"=>$link, "prod_available"=>$isAvailable]
+                "prod_name"=>$name, "html"=>$html, "prod_available"=>$isAvailable]
             );
             if ($result != 0) {
                 $message = '<strong>New Category</strong> Added Successfully!';
@@ -54,14 +54,14 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
             }
         }
         $name = '';
-        $link = '';
+        $html = '';
         break;
     case 'edit';
         $id = $query->getSafeValue($_REQUEST['id']);
         $result = $query->getData('tbl_product', '', ["id"=>$id]);
         if ($result != 0) {
             $name = $result[0]['prod_name'];
-            $link = $result[0]['link'];
+            $html = $result[0]['html'];
             $isAvailable = (int)$result[0]['prod_available'];
             $action = 'update';
         } else {
@@ -73,13 +73,13 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
     case 'update':
         $mainCategory = $query->getSafeValue($_REQUEST['mainCategory']);
         $name = ucwords($query->getSafeValue($_REQUEST['name']));
-        $link = $query->getSafeValue($_REQUEST['link']);
+        $html = $query->getSafeValue($_REQUEST['html']);
         $isAvailable = $query->getSafeValue($_REQUEST['isAvailable']);
         $id = $query->getSafeValue($_REQUEST['id']);
 
         $data = $query->getData('tbl_product', '', ["id"=>$id]);
         if (ucwords($data[0]['prod_name']) == $name 
-            and $data[0]['link'] == $link
+            and $data[0]['html'] == $html
             and $data[0]['prod_available'] == $isAvailable
         ) {
             $message = '<strong>Nothing</strong> is Updated!';
@@ -99,7 +99,7 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
             }
         }
         $name = '';
-        $link = '';
+        $html = '';
         break;
     case 'delete':
         $id = $query->getSafeValue($_REQUEST['id']);
@@ -112,7 +112,7 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
             $className = 'alert-danger';
         }
         $name = '';
-        $link = '';
+        $html = '';
         break;
     }
 }
@@ -141,7 +141,7 @@ require 'header.inc.php';
                     <?php endif; ?>
                     </div>
                     <div class="card-body">
-                        <form class="form-inline" method="POST" id="cat-form">
+                        <form method="POST" id="cat-form">
                             <select class="custom-select mb-2 mr-2" 
                                 name="mainCategory" id="category" required>
                                 <option value="">Main Category...</option>
@@ -161,11 +161,11 @@ require 'header.inc.php';
                             value="<?php echo $name; ?>" required 
                             pattern="^[a-zA-Z0-9 ]+$">
 
-                            <input type="text" class="form-control mb-2 mr-sm-2" 
-                            id="link" placeholder="Link..." 
-                            value="<?php echo $link; ?>" 
-                            name="link">
-                            <select class="custom-select mb-2 mr-2" 
+                            <textarea type="text" class="form-control mb-2 mr-sm-2" 
+                            id="editor" 
+                            name="html"> <?php echo $html; ?> </textarea>
+                            
+                            <select class="custom-select mb-2 mr-2 mt-3" 
                                 name="isAvailable" id="isAvailable" required>
                                 <option value="">Is Available...</option>
                                 <option 
@@ -201,7 +201,7 @@ require 'header.inc.php';
                                 <th>#</th>
                                 <th>Category</th>
                                 <th>Sub-Category</th>
-                                <th>Link</th>
+                                <th>HTML</th>
                                 <th>Availibility</th>
                                 <th class="d-none d-md-table-cell" 
                                 style="width:25%">Launch Date</th>
@@ -229,7 +229,7 @@ require 'header.inc.php';
                                 ?>
                             </td>
                             <td><?php echo $category['prod_name']; ?></td>
-                            <td><?php echo $category['link']; ?> </td>
+                            <td><?php echo $category['html']; ?> </td>
                             <td>
                                 <?php echo $category['prod_available']?'Yes':'No'; ?>
                             </td>
@@ -266,13 +266,20 @@ require 'header.inc.php';
     </div>
 </main>
 
-
 <?php
 require 'footer.inc.php';
 ?>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" 
 integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
 crossorigin="anonymous"></script>
+ <script src="https://cdn.tiny.cloud/1/l2es4shp5mm2koffdmqa80qeu5yx27n2ah8ciwtk0pngs2o6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: 'textarea#editor',
+        menubar: true
+      });
+    </script>
 <!-- <script src="js/category-form-validation.js"></script> -->
 </body>
 </html>
