@@ -120,8 +120,14 @@ $cart = new Cart;
         </tbody>
     </table>
     <div class="text-right">
-        <a href="#" class="btn btn-primary btn-lg">Checkout</a>
-        <a href="#" class="btn btn-danger btn-lg">Empty Cart</a>
+        <a href="javascript:void(0);" class="btn btn-primary btn-lg">Checkout</a>
+        <a 
+            href="javascript:void(0);" 
+            class="btn btn-danger btn-lg"
+            onclick="emptyCart();"
+        >
+            Empty Cart
+        </a>
     </div>
     <br>
     <br>

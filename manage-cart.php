@@ -27,7 +27,7 @@ case 'remove':
     break;
 
 case 'empty':
-    echo 'Empty';
+    $cart->emptyCart();
     break;
 }
 

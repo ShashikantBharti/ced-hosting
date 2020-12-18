@@ -31,4 +31,14 @@ function removeProduct(id='', type='') {
 		}
 	});
 }
+function emptyCart(){
+	$.ajax({
+		url: "manage-cart.php",
+		method: "POST",
+		data: {type: 'empty'},
+		success: function(res){
+			location.href = 'cart.php';
+		}
+	});
+}
 
