@@ -14,6 +14,11 @@
  */
 
     require 'header.inc.php';
+    $html = $query->getData(
+        'tbl_product', ['html'], 
+        ['id'=>2]
+    );
+
     
 ?>
 <!---singleblog--->
@@ -77,7 +82,14 @@
                                         <li><strong>location</strong> : <img src="images/india.png"></li>
                                         </ul>
                                     </div>
-                                    <a href="#" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">buy now</a>
+                                    <a href="javascript:void(0);" 
+                                    onclick="manageCart(
+                                        this,
+                                        <?php echo $product['prod_id']; ?>,
+                                        `<?php echo $product['sku']; ?>`,
+                                        'add',
+                                        `<?php echo $html[0]['html']; ?>`);
+                                    ">Add Product</a>
                                 </div>
 
                                 <?php
@@ -97,7 +109,7 @@
                             if($data == 0) {
                                 echo 'No Data Available';
                             } else {
-                                foreach($data as $product) {
+                                foreach ($data as $product) {
                                     $desc = (array)json_decode($product['description']);
                                 ?>
                                 <div class="col-md-3 linux-price">
@@ -117,7 +129,14 @@
                                         <li><strong>location</strong> : <img src="images/us.png"></li>
                                         </ul>
                                     </div> 
-                                    <a href="#" class="us-bottom" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">buy now</a>
+                                    <a href="javascript:void(0);" 
+                                    onclick="manageCart(
+                                        this,
+                                        <?php echo $product['prod_id']; ?>,
+                                        `<?php echo $product['sku']; ?>`,
+                                        'add',
+                                        `<?php echo $html[0]['html']; ?>`);
+                                    ">Add Product</a>
                                 </div>
                                 <?php
                                 }

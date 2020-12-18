@@ -1,5 +1,24 @@
 <?php 
+/**
+ * Linux Hosting Page.
+ * 
+ * PHP version 7
+ * 
+ * @category  Services.
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @version   GIT: <1.0>
+ * @link      http://127.0.0.1/training/ced_hosting
+ */
     require 'header.inc.php';
+
+    $html = $query->getData(
+        'tbl_product', ['html'], 
+        ['id'=>2]
+    );
+
 ?>
 <!---singleblog--->
 <div class="content">
@@ -61,7 +80,14 @@
                                         <li><strong>location</strong> : <img src="images/india.png"></li>
                                         </ul>
                                     </div>
-                                    <a href="#" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">buy now</a>
+                                    <a href="javascript:void(0);" 
+                                    onclick="manageCart(
+                                        this,
+                                        <?php echo $product['prod_id']; ?>,
+                                        `<?php echo $product['sku']; ?>`,
+                                        'add',
+                                        `<?php echo $html[0]['html']; ?>`);
+                                    ">Add Product</a>
                                 </div>
 
                                 <?php
@@ -100,7 +126,14 @@
                                         <li><strong>location</strong> : <img src="images/us.png"></li>
                                         </ul>
                                     </div>
-                                    <a href="#" class="us-bottom" onclick="manageCart(this,<?php echo $product['prod_id']; ?>,`<?php echo $product['sku']; ?>`,'add');">buy now</a>
+                                    <a href="javascript:void(0);" 
+                                    onclick="manageCart(
+                                        this,
+                                        <?php echo $product['prod_id']; ?>,
+                                        `<?php echo $product['sku']; ?>`,
+                                        'add',
+                                        `<?php echo $html[0]['html']; ?>`);
+                                    ">Add Product</a>
                                 </div>
 
                                 <?php

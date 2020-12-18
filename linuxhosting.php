@@ -213,14 +213,13 @@
                                     </div>
                                     
                                     <a href="javascript:void(0);" 
-                                    class="us-bottom" onclick="manageCart(
+                                        onclick="manageCart(
                                         this,
                                         <?php echo $product['prod_id']; ?>,
                                         `<?php echo $product['sku']; ?>`,
                                         'add',
-                                        `<?php echo $html[0]['html']; ?>`
-                                        );">Add Product
-                                    </a>
+                                        `<?php echo $html[0]['html']; ?>`);
+                                    ">Add Product</a>
                                 </div>
 
                                     <?php
