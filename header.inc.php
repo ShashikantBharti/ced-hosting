@@ -111,7 +111,6 @@ if (isset($_REQUEST['action']) and $_REQUEST['action'] != '') {
 }
 
 $cart = new Cart;
-$totalProduct = $cart->totalProduct();
 
 ?>
 
@@ -222,7 +221,7 @@ if ($url == 'index.php'
                                 </h1>
                             </div>
                         </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" 
                         id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
@@ -343,7 +342,8 @@ if ($url == 'index.php'
                                         <i class="fas fa-shopping-cart"></i>
                                         <span class="badge badge-danger" 
                                         id="totalProduct">
-                                        <?php echo $totalProduct; ?></span>
+                                        <?php echo $cart->totalProduct(); ?>
+                                        </span>
                                     </a>
                                 </li>
                             </ul>

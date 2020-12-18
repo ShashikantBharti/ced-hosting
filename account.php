@@ -1,4 +1,19 @@
 <?php
+/**
+ * Account page to registration for new user.
+ * 
+ * PHP version 7
+ * 
+ * @category  Services.
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @version   GIT: <1.0>
+ * @link      http://127.0.0.1/training/ced_hosting
+ */
+
+
     require_once 'functions.inc.php';
   
     $query = new Query;
@@ -16,11 +31,19 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
     if ($password == $confirmPassword) {
         $password = md5($password);
         $name = $firstName.' '.$lastName;
-        $result = $query->insertData('tbl_user', ["email"=>$email,"name"=>$name,"mobile"=>$mobile,"email_approved"=>0,"phone_approved"=>0,"active"=>0,"is_admin"=>0,"password"=>$password, "security_question"=>$securityQuestion,"security_answer"=>$securityAnser]);
+        $result = $query->insertData(
+            'tbl_user', 
+            ["email"=>$email,"name"=>$name,"mobile"=>$mobile,
+            "email_approved"=>0,"phone_approved"=>0,"active"=>0,
+            "is_admin"=>0,"password"=>$password, 
+            "security_question"=>$securityQuestion,
+            "security_answer"=>$securityAnser]
+        );
         if ($result) {
-            $result = $query->sendMail($email,$name,$result);
+            $result = $query->sendMail($email, $name, $result);
             if ($result) {
-                $regMessage = "<strong>Registration successfull!</strong> Check your email!";
+                $regMessage = "<strong>Registration successfull!</strong> 
+                                Check your email!";
                 $regClassName = "alert-success";
             } else {
                 $regMessage = "OOPs Something went wrong!";
@@ -41,14 +64,19 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
     <div class="main-1">
         <div class="container">
             <div class="register">
-                <?php  if ($regMessage != ''):  ?>
-                <div class="alert <?php echo $regClassName; ?> alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <div class="alert-regMessage">
-                            <?php echo $regMessage; ?>
-                        </div>
+                <?php  if ($regMessage != '') :  ?>
+                <div 
+                    class="alert <?php echo $regClassName; ?> 
+                    alert-dismissible" role="alert"
+                >
+                    <button type="button" class="close" 
+                    data-dismiss="alert" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="alert-regMessage">
+                        <?php echo $regMessage; ?>
+                    </div>
                     </div>
                 <?php endif; ?>
               <form action="" method="POST" id="reg-form"> 
@@ -56,41 +84,63 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                     <h3>personal information</h3>
                      <div>
                         <span>First Name <label>*</label></span>
-                        <input type="text" name="firstName" id="firstName" placeholder="John"> 
+
+                        <input type="text" name="firstName" 
+                        id="firstName" placeholder="John"> 
+
                         <span id="firstNameHelp" class="help-block"> </span>
                      </div>
                      <div>
                         <span>Last Name <label>*</label></span>
-                        <input type="text" name="lastName" id="lastName" placeholder="Doe"> 
+
+                        <input type="text" name="lastName" 
+                        id="lastName" placeholder="Doe"> 
+
                         <span id="lastNameHelp" class="help-block"> </span>
                      </div>
                      
                      <div>
-                         <span>Mobile Number <label>*</label></span>
-                         <input type="text" name="mobile" id="mobile" placeholder="7894561230"> 
-                         <span id="mobileHelp" class="help-block"> </span>
+                        <span>Mobile Number <label>*</label></span>
+
+                        <input type="text" name="mobile" 
+                        id="mobile" placeholder="7894561230"> 
+
+                        <span id="mobileHelp" class="help-block"> </span>
                      </div>
                      <div>
-                         <span>Email Address <label>*</label></span>
-                         <input type="text" name="email" id="email" placeholder="example@example.com"> 
-                         <span id="emailHelp" class="help-block"> </span>
+                        <span>Email Address <label>*</label></span>
+
+                        <input type="text" name="email" 
+                        id="email" placeholder="example@example.com">
+
+                        <span id="emailHelp" class="help-block"> </span>
                      </div>
                      <div class="clearfix"> </div>
                        <a class="news-letter" href="#">
-                         <label class="checkbox"><input type="checkbox" name="checkbox" value="1"><i> </i>Sign Up for Newsletter</label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="checkbox" value="1">
+                                Sign Up for Newsletter
+                            </label>
                        </a>
                      </div>
                      <div class="register-bottom-grid">
                             <h3>login information</h3>
                              <div>
                                 <span>Password <label>*</label></span>
-                                <input type="password" name="password" id="password" placeholder="Password@123">
+
+                                <input type="password" name="password" 
+                                id="password" placeholder="Password@123">
+
                                 <span id="passwordHelp" class="help-block"> </span>
                              </div>
                              <div>
                                 <span>Confirm Password <label>*</label></span>
-                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Password@123"> 
-                                <span id="confirmPasswordHelp" class="help-block"> </span>
+
+                                <input type="password" name="confirmPassword" 
+                                id="confirmPassword" placeholder="Password@123"> 
+
+                                <span id="confirmPasswordHelp" class="help-block"> 
+                                </span>
                              </div>
                      </div>
                      <div class="clearfix"></div>
@@ -98,25 +148,49 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] != '') {
                         <h3>Security Information</h3>
                          <div class="has-error">
                             <span>Security Question ? <label>*</label></span>
-                            <select name="securityQuestion" id="securityQuestion" class="form-control"> 
+                            <select name="securityQuestion" 
+                            id="securityQuestion" class="form-control"> 
                                 <option value="">Choose an option...</option>
-                                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
-                                <option value="What is the name of your favourite childhood friend?">What is the name of your favourite childhood friend?</option>
-                                <option value="What was your favourite place to visit as a child?">What was your favourite place to visit as a child?</option>
-                                <option value="What was your dream job as a child?">What was your dream job as a child?</option>
-                                <option value="What is your favourite teacher's nickname?">What is your favourite teacher's nickname?</option>
+
+                                <option 
+                                    value="What was your childhood nickname?">
+                                    What was your childhood nickname?
+                                </option>
+
+                                <option 
+                                    value="What is the name of your favourite 
+                                    childhood friend?">
+                                    What is the name of your favourite 
+                                    childhood friend?
+                                </option>
+
+                                <option value="What was your favourite place to 
+                                visit as a child?">What was your favourite place 
+                                to visit as a child?</option>
+
+                                <option value="What was your dream job as a 
+                                child?">What was your dream job as a child?</option>
+
+                                <option value="What is your favourite teacher's 
+                                nickname?">What is your favourite teacher's 
+                                nickname?</option>
+
                             </select>
                             <span class="help-block"></span>
                          </div>
                          <div>
                             <span>Security Anser ? <label>*</label></span>
-                            <input type="password" name="securityAnser" id="securityAnser" placeholder="Your anser..."> 
+
+                            <input type="password" name="securityAnser" 
+                            id="securityAnser" placeholder="Your anser..."> 
+
                             <span id="securityAnserHelp" class="help-block"> </span>
                          </div>
                      </div>
                      
 
-                     <button type="submit" name="submit" value="submit" class="register-btn">Submit</button>
+                     <button type="submit" name="submit" value="submit" 
+                     class="register-btn">Submit</button>
                      
                 </form>
                 <p> * Mandatory fields.</p>

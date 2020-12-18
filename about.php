@@ -1,4 +1,17 @@
 <?php 
+/**
+ * About Us page to display about CedHosting.
+ * 
+ * PHP version 7
+ * 
+ * @category  Services.
+ * @package   Ced_Hosting
+ * @author    Shashikant Bharti <surya.indian321@gmail.com>
+ * @copyright 2020 CEDCOSS 
+ * @license   CEDCOSS 
+ * @version   GIT: <1.0>
+ * @link      http://127.0.0.1/training/ced_hosting
+ */
 
     require 'header.inc.php';
 ?>
@@ -13,172 +26,232 @@
                         </div>
                         <div class="col-md-9 about-grid1">
                         <h4>Mes cuml dia sed inenias ingerto lot aliiqtes</h4>
-                        <p>Nemo enim ips voluptatem voluptas sitsper natuaut odit aut fugit 
-						consequuntur magni dolores eosqratio nevoluptatem nesciunt lacusueni 
-						ascet dolingerto aliiqt sit amet eism com odictor ut ligulate cot ameti 
-						dapibu. Nemo enim ipsam voluptatem voluptas sit. Aspernatur aut odit aut 
-						fugit sed quia consequuntur magni dolores eos qui rationevoluptatem nesciunt.
-						 Neque poMes cuml dia sed in lacusut eniascet ingerto aliiqt es site amet .</p>
-									<div class="about-bottom">
-										<div class="col-md-6 about-bottomgrid">
-											<p>Ticdu nt mtsent justo dolor losubo ltiissim commete pulvinar ac. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus Duis ultricies.  </p>
-											<p>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis ultricies pharetra.</p>
-										</div>
-										<div class="col-md-6 about-bottomgrid1">
-										<img src="images/p5.jpg" class="img-responsive" alt="/">
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-					<!--about--->
-					<!--whatdo--->
-					<div class="whatdo">
-						<div class="container">
-							<h3>What We Do?</h3>
-							<div class="what-grids">
-								<div class="col-md-4 what-grid">
-									<div class="what-left">
-									<i class="glyphicon glyphicon-cog" aria-hidden="true"></i>
-									</div>
-									<div class="what-right">
-										<h4>Expert Web Design</h4>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </p>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="col-md-4 what-grid">
-									<div class="what-left">
-									<i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
-									</div>
-									<div class="what-right">
-										<h4>Expert Web Design</h4>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </p>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="col-md-4 what-grid">
-									<div class="what-left">
-									<i class="glyphicon glyphicon-stats" aria-hidden="true"></i>
-									</div>
-									<div class="what-right">
-										<h4>Expert Web Design</h4>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </p>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="what-grids">
-								<div class="col-md-4 what-grid">
-									<div class="what-left">
-									<i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
-									</div>
-									<div class="what-right">
-										<h4>Expert Web Design</h4>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </p>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="col-md-4 what-grid">
-									<div class="what-left">
-									<i class="glyphicon glyphicon-move" aria-hidden="true"></i>
-									</div>
-									<div class="what-right">
-										<h4>Expert Web Design</h4>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </p>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="col-md-4 what-grid">
-									<div class="what-left">
-									<i class="glyphicon glyphicon-screenshot" aria-hidden="true"></i>
-									</div>
-									<div class="what-right">
-										<h4>Expert Web Design</h4>
-										<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </p>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-					<!--whatdo--->
-					<!--solution--->
-						<div class="solution-section">
-							<div class="container">
-									<h3> our solution</h3>
-								<div class="solution-grids">
-									<div class="col-md-4 solution-grid">
-										<div class="solution">
-										<a href="single.php" class="mask"><img src="images/p6.jpg" class="img-responsive zoom-img" alt=""/></a>
-											<h4>Vestibulum iaculis</h4>
-											<p>lacinia / dictum</p>
-										</div>
-									</div>
-									<div class="col-md-4 solution-grid">
-										<div class="solution">
-											<a href="single.php" class="mask"><img src="images/p7.jpg" class="img-responsive zoom-img" alt=""/></a>
-											<h4>elementum velit</h4>
-											<p>Fusce / uismod</p>
-										</div>
-									</div>
-									<div class="col-md-4 solution-grid">
-										<div class="solution">
-											<a href="single.php" class="mask"><img src="images/p8.jpg" class="img-responsive zoom-img" alt=""/></a>
-											<h4>adipiscing elit</h4>
-											<p>consequat / ante</p>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>	
-					<!--solution--->
-					<!--statistics--->
-						<div class="statistics">
-							<div class="container">
-								<h3>statistics</h3>
-								<div class="statistics-grids">
-									<div class="col-md-3 statistics-grid">
-										<div class="statistic">
-											<h4>65%</h4>
-											<h5>Lorem ipsum dolor</h5>
-											<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt .</p>
-										</div>
-									</div>
-									<div class="col-md-3 statistics-grid">
-										<div class="statistic">
-											<h4>75%</h4>
-											<h5>Lorem ipsum dolor</h5>
-											<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt .</p>
-										</div>
-									</div>
-									<div class="col-md-3 statistics-grid">
-										<div class="statistic">
-											<h4>85%</h4>
-											<h5>Lorem ipsum dolor</h5>
-											<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt .</p>
-										</div>
-									</div>
-									<div class="col-md-3 statistics-grid">
-										<div class="statistic">
-											<h4>95%</h4>
-											<h5>Lorem ipsum dolor</h5>
-											<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt .</p>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					<!--statistics--->
-				</div>
-			
+                        <p>
+                            Nemo enim ips voluptatem voluptas sitsper natuaut 
+                            odit aut fugit consequuntur magni dolores eosqratio 
+                            nevoluptatem nesciunt lacusueni ascet dolingerto 
+                            aliiqt sit amet eism com odictor ut ligulate cot ameti 
+                            dapibu. Nemo enim ipsam voluptatem voluptas sit. 
+                            Aspernatur aut odit aut fugit sed quia consequuntur 
+                            magni dolores eos qui rationevoluptatem nesciunt. 
+                            Neque poMes cuml dia sed in lacusut eniascet 
+                            ingerto aliiqt es site amet .
+                        </p>
+                        <div class="about-bottom">
+                            <div class="col-md-6 about-bottomgrid">
+                                <p>
+                                    Ticdu nt mtsent justo dolor losubo ltiissim 
+                                    commete pulvinar ac. Lorem ipsum dolor sit 
+                                    amet, consectetuer adipiscing elit. Praesent 
+                                    vestibulum molestie lacus Duis ultricies.  
+                                </p>
+                                <p>
+                                    Nulla dui. Fusce feugiat malesuada odio. 
+                                    Morbi nunc odio, gravida at, cursus nec, 
+                                    luctus a, lorem. Maecenas tristique orci 
+                                    ac sem. Duis ultricies pharetra magna. Donec 
+                                    accumsan malesuada orci. Donec sit amet eros. 
+                                    Lorem ipsum dolor sit amet, consectetuer 
+                                    adipiscing elit. Duis ultricies pharetra.
+                                </p>
+                            </div>
+                        <div class="col-md-6 about-bottomgrid1">
+                            <img src="images/p5.jpg" class="img-responsive" alt="/">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+<!--about--->
+<!--whatdo--->
+<div class="whatdo">
+    <div class="container">
+        <h3>What We Do?</h3>
+        <div class="what-grids">
+            <div class="col-md-4 what-grid">
+                <div class="what-left">
+                    <i class="glyphicon glyphicon-cog" aria-hidden="true"></i>
+                </div>
+            <div class="what-right">
+            <h4>Expert Web Design</h4>
+            <p>
+                Lorem ipsum dolor sit amet conse ctetur adipisicing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore 
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-4 what-grid">
+        <div class="what-left">
+            <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
+        </div>
+    <div class="what-right">
+        <h4>Expert Web Design</h4>
+        <p>
+            Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore 
+        </p>
+    </div>
+    <div class="clearfix"></div>
+</div>
+    <div class="col-md-4 what-grid">
+        <div class="what-left">
+            <i class="glyphicon glyphicon-stats" aria-hidden="true"></i>
+        </div>
+        <div class="what-right">
+        <h4>Expert Web Design</h4>
+        <p>
+            Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore 
+        </p>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+</div>
+    <div class="what-grids">
+        <div class="col-md-4 what-grid">
+            <div class="what-left">
+                <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+            </div>
+            <div class="what-right">
+                <h4>Expert Web Design</h4>
+                <p>
+                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do 
+                    eiusmod tempor incididunt ut labore et dolore 
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-4 what-grid">
+        <div class="what-left">
+            <i class="glyphicon glyphicon-move" aria-hidden="true"></i>
+        </div>
+        <div class="what-right">
+            <h4>Expert Web Design</h4>
+            <p>
+                Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do 
+                eiusmod tempor incididunt ut labore et dolore 
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-4 what-grid">
+        <div class="what-left">
+            <i class="glyphicon glyphicon-screenshot" aria-hidden="true"></i>
+        </div>
+        <div class="what-right">
+            <h4>Expert Web Design</h4>
+            <p>
+                Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do 
+                eiusmod tempor incididunt ut labore et dolore 
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+</div>
+<!--whatdo--->
+<!--solution--->
+                <div class="solution-section">
+                    <div class="container">
+                        <h3> our solution</h3>
+                        <div class="solution-grids">
+                            <div class="col-md-4 solution-grid">
+                                <div class="solution">
+                                    <a href="single.php" class="mask">
+                                        <img src="images/p6.jpg" 
+                                        class="img-responsive zoom-img" alt=""/>
+                                    </a>
+                                    <h4>Vestibulum iaculis</h4>
+                                    <p>lacinia / dictum</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 solution-grid">
+                                <div class="solution">
+                                    <a href="single.php" class="mask">
+                                        <img src="images/p7.jpg" 
+                                        class="img-responsive zoom-img" alt=""/>
+                                    </a>
+                                    <h4>elementum velit</h4>
+                                    <p>Fusce / uismod</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 solution-grid">
+                                <div class="solution">
+                                    <a href="single.php" class="mask">
+                                        <img src="images/p8.jpg" 
+                                        class="img-responsive zoom-img" alt=""/>
+                                    </a>
+                                    <h4>adipiscing elit</h4>
+                                    <p>consequat / ante</p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--solution--->
+                <!--statistics--->
+                <div class="statistics">
+                    <div class="container">
+                        <h3>statistics</h3>
+                        <div class="statistics-grids">
+                            <div class="col-md-3 statistics-grid">
+                                <div class="statistic">
+                                    <h4>65%</h4>
+                                    <h5>Lorem ipsum dolor</h5>
+                                    <p>
+                                        Lorem ipsum dolor sit amet conse ctetur 
+                                        adipisicing elit, sed do eiusmod tempor 
+                                        incididunt.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 statistics-grid">
+                                <div class="statistic">
+                                    <h4>75%</h4>
+                                    <h5>Lorem ipsum dolor</h5>
+                                    <p>
+                                        Lorem ipsum dolor sit amet conse ctetur 
+                                        adipisicing elit, sed do eiusmod tempor 
+                                        incididunt. 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 statistics-grid">
+                            <div class="statistic">
+                                <h4>85%</h4>
+                                <h5>Lorem ipsum dolor</h5>
+                                <p>
+                                    Lorem ipsum dolor sit amet conse ctetur 
+                                    adipisicing elit, sed do eiusmod tempor 
+                                    incididunt.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 statistics-grid">
+                            <div class="statistic">
+                                <h4>95%</h4>
+                                <h5>Lorem ipsum dolor</h5>
+                                <p>
+                                    Lorem ipsum dolor sit amet conse ctetur 
+                                    adipisicing elit, sed do eiusmod tempor 
+                                    incididunt.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        <!--statistics--->
+        </div>
 <?php 
-	require 'footer.inc.php';
+    require 'footer.inc.php';
 ?>

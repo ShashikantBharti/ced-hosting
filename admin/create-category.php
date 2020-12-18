@@ -78,7 +78,8 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
         $id = $query->getSafeValue($_REQUEST['id']);
 
         $data = $query->getData('tbl_product', '', ["id"=>$id]);
-        if (ucwords($data[0]['prod_name']) == $name 
+
+        if (ucwords($data[0]['prod_name']) == $name
             and $data[0]['html'] == $html
             and $data[0]['prod_available'] == $isAvailable
         ) {
@@ -87,7 +88,7 @@ if (isset($_REQUEST['category']) and $_REQUEST['category'] != '') {
         } else {
             $result = $query->updateData(
                 'tbl_product', ["prod_parent_id"=>$mainCategory, "prod_name"=>$name, 
-                "link"=>$link, "prod_available"=>$isAvailable], ["id"=>$id]
+                "html"=>$html, "prod_available"=>$isAvailable], ["id"=>$id]
             );
 
             if ($result) {
@@ -272,7 +273,10 @@ require 'footer.inc.php';
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" 
 integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
 crossorigin="anonymous"></script>
- <script src="https://cdn.tiny.cloud/1/l2es4shp5mm2koffdmqa80qeu5yx27n2ah8ciwtk0pngs2o6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script 
+src="https://cdn.tiny.cloud/1/
+l2es4shp5mm2koffdmqa80qeu5yx27n2ah8ciwtk0pngs2o6/tinymce/5/tinymce.min.js" 
+referrerpolicy="origin"></script>
 
     <script>
       tinymce.init({

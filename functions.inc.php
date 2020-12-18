@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Create category page.
  * 
@@ -171,7 +170,6 @@ class Query extends Database
         if ($condition2 != '') {
             $sql .= " AND `$condition2[0]`.`$condition2[1]` = '$condition2[2]' ";
         }
-        
         $result = $this->connect()->query($sql);
         if ($result->num_rows > 0) {
             $arr = array();
@@ -399,7 +397,15 @@ class Cart
      */
     public function addProduct($id = '',$sku = '') 
     {
-        array_push($_SESSION['CART'], ["id"=>$id,"sku"=>$sku]);
+        if (empty($_SESSION['CART'])) {
+            $_SESSION['CART'][$id]['sku'] = $sku;
+        } else {
+            foreach ($_SESSION['CART'] as $product) {
+                if ($id != $product['id']) {
+                    $_SESSION['CART'][$id]['sku'] = $sku;
+                }
+            }
+        }
     }
 
     /**
@@ -425,7 +431,6 @@ class Cart
     {
         unset($_SESSION['CART']);
     }
-
 
     /**
      * Function to remove product from cart.
