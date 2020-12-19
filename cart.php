@@ -120,7 +120,7 @@ $cart = new Cart;
         </tbody>
     </table>
     <div class="text-right">
-        <a href="javascript:void(0);" class="btn btn-primary btn-lg">Checkout</a>
+        <a href="checkout.php" class="btn btn-primary btn-lg">Checkout</a>
         <a 
             href="javascript:void(0);" 
             class="btn btn-danger btn-lg"
